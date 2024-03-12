@@ -42,7 +42,7 @@ const File = () => {
 
     try {
         console.log('I am here')
-        const response  = await axios.post(`${url}upload/`, formData, {
+        const response  = await axios.post(`https://priset-api.onrender.com/upload/`, formData, {
             headers: {
                 "Content-Type": "multipart/form-data"
             },
