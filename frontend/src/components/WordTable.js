@@ -5,7 +5,7 @@ import Table from 'react-bootstrap/Table';
 import NavButtons from "./NavButtons.js";
 import '../App.css';
 
-const url = process.env.REACT_APP_API_URL;
+const url = "https://priset-api.onrender.com/";
 
 const WordTable = ( ) => {
     const {kiwiTable, setKiwiTable, file_path, header, setWords} = useContext(AppContext);
