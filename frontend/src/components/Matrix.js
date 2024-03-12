@@ -5,7 +5,7 @@ import { ForceGraph2D } from 'react-force-graph';
 import '../App.css';
 import NavButtons from "./NavButtons.js";
 
-const url = process.env.REACT_APP_API_URL;
+const url = "https://priset-api.onrender.com/";
 
 const Matrix = () => {
     const [matrix, setMat] = useState({ nodes: [], links: [] });
