@@ -42,11 +42,12 @@ const File = () => {
 
     try {
         console.log('I am here')
-        const response  = await axios.post(`https://priset-api.onrender.com/upload/`, formData, {
+        const response  = await axios.post(`${url}`, formData, {
             headers: {
                 "Content-Type": "multipart/form-data"
             },
         });
+        console.log(response.data)
         const keywords  = response.data.kiwi_table;
         const path      = response.data.path
         const tableData = keywords.map(({ Word, Pages }) => ({

@@ -21,7 +21,7 @@ const Link = () => {
 
         let body = {link: linkInput.current.value};
         try {
-            const response = await axios.post(`https://priset-api.onrender.com/upload/`, body);
+            const response = await axios.post(`${url}upload/`, body);
             let data       = response.data;
             if (data.msg) {
                 setMsg('Oops! It is not a correct link..')

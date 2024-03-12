@@ -4,7 +4,7 @@ import File from "./File.js";
 import '../App.css';
 
 export const UploadContext = createContext();
-const url = "https://priset-api.onrender.com/";
+const url = process.env.REACT_APP_API_URL;
 
 const UploadScreen = () => {
   // To save the path of the loaded doc
