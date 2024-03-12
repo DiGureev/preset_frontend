@@ -5,7 +5,7 @@ import Plot from 'react-plotly.js';
 import NavButtons from "./NavButtons.js";
 import '../App.css';
 
-const url = process.env.REACT_APP_API_URL;
+const url = "https://priset-api.onrender.com/";
 
 const PlotPage = () => {
     const [plot, setPlot] = useState([]);
