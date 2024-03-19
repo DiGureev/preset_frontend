@@ -11,10 +11,10 @@ const fileTypes = ["PDF"];
 const File = () => {
     const [file, setFile] = useState('');
     const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+    const [isLoading, setIsLoading] = useState(false); 
 
-    const {setPath, setKeywordsFetched, setKiwiTable, setHeader, setTable} = useContext(AppContext);
-    const {url, 
-           setMsg}       = useContext(UploadContext);
+    const { setPath, setKeywordsFetched, setKiwiTable, setHeader, setTable, setURL } = useContext(AppContext);
+    const { url, setMsg } = useContext(UploadContext);
 
     useEffect(() => {
         if (file) {
@@ -22,49 +22,73 @@ const File = () => {
         } else {
             setIsButtonDisabled(true);
         }
-    }, [file])
+    }, [file]);
 
     const handleFileChange = (file) => {
         if (file) {
             setMsg('');
             console.log(file);
             setFile(file);
-        };
+        }
     };
 
     const handleUploadClick = async () => {
-    if (!file) {
-        setMsg('Please, upload the file');
-        return;
+        if (!file) {
+            setMsg('Please, upload the file');
+            return;
+        }
+
+        setIsLoading(true); 
+
+        let formData = new FormData();
+        formData.append('file', file);
+
+        try {
+            const response = await axios.post(`${url}upload/`, formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data"
+                },
+            });
+            console.log(response.data);
+            const keywords = response.data.kiwi_table;
+            const path = response.data.path;
+            const tableData = keywords.map(({ Word, Pages }) => ({
+                Word,
+                Pages: Pages.join(', ')
+            }));
+
+            setHeader('Here are the keywords from your file:');
+            setKiwiTable(tableData);
+            download(tableData)
+            setPath(path);
+            setKeywordsFetched(true);
+            setTable(true);
+        } catch (error) {
+            console.error('There was an error:', error);
+        } finally {
+            setIsLoading(false); 
+        }
     };
-    let formData = new FormData();
-    formData.append('file', file);
 
-    try {
-        console.log('I am here')
-        const response  = await axios.post(`${url}upload/`, formData, {
-            headers: {
-                "Content-Type": "multipart/form-data"
-            },
-        });
-        console.log(response.data)
-        const keywords  = response.data.kiwi_table;
-        const path      = response.data.path
-        const tableData = keywords.map(({ Word, Pages }) => ({
-            Word,
-            Pages: Pages.join(', ') 
-        }));
-
-        setHeader('Here are the keywords from your file:');
-        setKiwiTable(tableData);
-        setPath(path);
-        setKeywordsFetched(true);
-        setTable(true)
-    
-    } catch (error) {
-        console.error('There was an error:', error);
+    const download = (dataTable) => {
+        const CSVRows = [];
+        const keys = "Word, Page";
+        CSVRows.push(keys);
+        let values = [];
+  
+        for (let obj of dataTable){
+          let value = Object.values(obj).join(",");
+          values.push(value);
+        }
+        
+        values = values.join('\n');
+        CSVRows.push(values);
+        let data = CSVRows.join('\n');
+        const blob = new Blob([data], { type: 'text/csv' }); 
+        const url = window.URL.createObjectURL(blob) ;
+          
+        setURL(url);
     }
-};
 
     return (
         <div className='upload-input'>
@@ -73,6 +97,12 @@ const File = () => {
                 <div style={{ marginTop: "10px", fontSize: "0.8rem" }}>{file && `${file.name} - ${file.type}`}</div>
             </div>
             <button onClick={handleUploadClick} disabled={isButtonDisabled}>Get the keywords</button>
+            {isLoading && (
+                <div className="loading-container">
+                    <div className="loading-spinner"></div>
+                    <div>Loading...</div>
+                </div>
+            )}
         </div>
     );
 }

@@ -17,13 +17,14 @@ function App() {
          setKeywordsFetched]      = useState(false);
   const [kiwiTable, setKiwiTable] = useState([]);
   const [header, setHeader]       = useState('');
-  const [table, setTable] = useState(false)
-  const [grasp, setGrasp] = useState(false)
-  const [matrix, setMatrix] = useState(false)
+  const [table, setTable]         = useState(false);
+  const [grasp, setGrasp]         = useState(false);
+  const [matrix, setMatrix]       = useState(false);
+  const [csvUrl, setURL]          = useState('#');
   
   return (
     <div className="grid-container">
-      <AppContext.Provider value={{addedWords, setWords, file_path, setPath, keywordsFetched, setKeywordsFetched, kiwiTable, setKiwiTable, header, setHeader, table, setTable, grasp, setGrasp, matrix, setMatrix}}>
+      <AppContext.Provider value={{addedWords, setWords, file_path, setPath, keywordsFetched, setKeywordsFetched, kiwiTable, setKiwiTable, header, setHeader, table, setTable, grasp, setGrasp, matrix, setMatrix, csvUrl, setURL}}>
         <Navbar />
         <Previous />
         <div className="content-container">

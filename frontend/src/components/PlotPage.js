@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect, useRef } from "react";
 import { AppContext } from '../App.js';
 import Plot from 'react-plotly.js';
 import NavButtons from "./NavButtons.js";
@@ -10,13 +10,18 @@ const url = process.env.REACT_APP_API_URL;
 const PlotPage = () => {
     const [plot, setPlot] = useState([]);
     const [selectedWord, setSelectedWord] = useState('');
-    const { addedWords, file_path, kiwiTable} = useContext(AppContext);
+    const { file_path, kiwiTable} = useContext(AppContext);
+    const additionalWords = useRef('');
+
+    const addWords = async () => {
+        setSelectedWord(additionalWords.current.value)
+    }
 
     const getPlot = async () => {
         let selected = selectedWord || (kiwiTable.length > 0 ? kiwiTable[0].Word : '');
 
         let body = {
-            words: addedWords || selected,
+            words: selected,
             path: file_path
         };
 
@@ -33,7 +38,7 @@ const PlotPage = () => {
 
     useEffect(() => {
         getPlot();
-    }, [addedWords, file_path, kiwiTable, selectedWord]);
+    }, [file_path, kiwiTable, selectedWord]);
 
 
     const handleSelectChange = (e) => {
@@ -43,6 +48,7 @@ const PlotPage = () => {
     return (
         <div className="result-div">
             <h2>Context Analytics</h2>
+            <div id='content'>
             <div id="additional-words">
                 <p id = "choose_words">Choose the word to build the graph:</p>
                 <select
@@ -55,12 +61,18 @@ const PlotPage = () => {
                         <option value={item.Word} key={index}>{item.Word}</option>
                     ))}
                 </select>
+                <div  id="additional-words">
+                <p>or enter your word: <br/></p>
+                <input id="additional-words-input" type="text" ref={additionalWords}/>
+                <button id="additional-words-btn" onClick={addWords}>Build the graph</button>
+                </div>
             </div>
             {selectedWord && (
-                <div>
-                    <Plot data={plot} layout={{ width: 600, height: 300, title: `Context for "${selectedWord}"` }} />
+                <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
+                    {plot.length == 0? <p>This word is not frequent enough or not present.<br/> Please try another word.</p> : <Plot data={plot} layout={{ width: 600, height: 300, title: `Context for "${selectedWord}"` }} />}
                 </div>
             )}
+            </div>
             
             <NavButtons/>
         </div>

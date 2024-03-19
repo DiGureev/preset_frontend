@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useContext, useRef} from "react";
+import { useContext, useEffect, useRef, useState} from "react";
 import { AppContext } from "../App";
 import Table from 'react-bootstrap/Table';
 import NavButtons from "./NavButtons.js";
@@ -8,7 +8,7 @@ import '../App.css';
 const url = process.env.REACT_APP_API_URL;
 
 const WordTable = ( ) => {
-    const {kiwiTable, setKiwiTable, file_path, header, setWords} = useContext(AppContext);
+    const {kiwiTable, setKiwiTable, file_path, header, setWords, csvUrl} = useContext(AppContext);
     const additionalWords = useRef('');
 
     const addWords = async () => {
@@ -63,6 +63,8 @@ const WordTable = ( ) => {
           <button id="additional-words-btn" onClick={addWords}>Add words to the table</button>
         </div>
         </div>
+
+        <button><a href={csvUrl} download="word-table.csv">Download table (CSV)</a></button>
         <NavButtons/>
       </div>
     )
