@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useContext, useEffect, useRef, useState} from "react";
+import { useContext, useRef} from "react";
 import { AppContext } from "../App";
 import Table from 'react-bootstrap/Table';
 import NavButtons from "./NavButtons.js";
@@ -18,15 +18,14 @@ const WordTable = ( ) => {
                   path: file_path
                 };
 
+      console.log(body)
+
       try {
-        const response  = await axios.post(`${url}add`, body);
-        let data        = response.data;
-        const keywords  = data.kiwi_table;
-        const tableData = keywords.map(({ Word, Pages }) => ({
-                                                              Word,
-                                                              Pages: Pages.join(', ') 
-                                                              }));
-          setKiwiTable(tableData);
+          const response  = await axios.post(`${url}add`, body);
+          let data        = response.data;
+          const keywords  = data.kiwi_table;
+          console.log(keywords)
+          setKiwiTable(keywords);
           // To clean input field
           additionalWords.current.value = '';
         } catch (error) {
@@ -64,7 +63,7 @@ const WordTable = ( ) => {
         </div>
         </div>
 
-        <button><a href={csvUrl} download="word-table.csv" style={{textDecoration: "none", color: "white"}}>Download table (CSV)</a></button>
+        <button><a href={csvUrl} download="word-table.csv">Download table (CSV)</a></button>
         <NavButtons/>
       </div>
     )

@@ -49,20 +49,17 @@ const File = () => {
                     "Content-Type": "multipart/form-data"
                 },
             });
-            console.log(response.data);
             const keywords = response.data.kiwi_table;
             const path = response.data.path;
-            const tableData = keywords.map(({ Word, Pages }) => ({
-                Word,
-                Pages: Pages.join(', ')
-            }));
 
             setHeader('Here are the keywords from your file:');
-            setKiwiTable(tableData);
-            download(tableData)
+            console.log(keywords)
+            setKiwiTable(keywords);
+            download(keywords)
             setPath(path);
             setKeywordsFetched(true);
             setTable(true);
+            setFile('')
         } catch (error) {
             console.error('There was an error:', error);
         } finally {

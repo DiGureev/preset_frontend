@@ -29,17 +29,13 @@ const Link = () => {
             } else {
                 const keywords = data.kiwi_table;
                 const path = data.path;
-                const tableData = keywords.map(({ Word, Pages }) => ({
-                    Word,
-                    Pages: Pages.join(', ') 
-                }));
-
                 setHeader('Here are the keywords from your file:');
-                setKiwiTable(tableData);
-                download(tableData);
+                setKiwiTable(keywords);
+                download(keywords);
                 setPath(path);
                 setKeywordsFetched(true);
                 setTable(true);
+                linkInput.current.value = ''
             }
         } catch (error) {
             console.error('There was an error:', error);
