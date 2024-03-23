@@ -63,7 +63,7 @@ const WordTable = ( ) => {
         </div>
         </div>
 
-        <button><a href={csvUrl} download="word-table.csv">Download table (CSV)</a></button>
+        <button id="download_csv"><a href={csvUrl} download="word-table.csv">Download table (CSV)</a></button>
         <NavButtons/>
       </div>
     )

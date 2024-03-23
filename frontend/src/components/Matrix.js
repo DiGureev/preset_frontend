@@ -10,6 +10,8 @@ const url = process.env.REACT_APP_API_URL;
 const Matrix = () => {
     const [matrix, setMat] = useState({ nodes: [], links: [] });
     const { file_path, addedWords} = useContext(AppContext);
+    const [displayWidth, setDisplayWidth] = useState(window.innerWidth);
+    const [displayHeight, setDisplayHeight] = useState(window.innerHeight);
 
     useEffect(()=> {
         fetchData();
@@ -40,13 +42,13 @@ const Matrix = () => {
     return (
         <div className="result-div">
             <h2>Document Word Web</h2>
-            <div style={{ width: "60%", margin: "auto"}}>
+            <div style={{display: "flex", justifyContent: "center"}}>
                 <ForceGraph2D
                     graphData={matrix}
                     backgroundColor={'white'}
                     linkColor = {"white"}
-                    width={700}
-                    height={500}
+                    width={displayWidth*0.6}
+                    height={300}
                     linkWidth={2}
                     nodeAutoColorBy="group"
                     nodeCanvasObject={(node, ctx, globalScale) => {

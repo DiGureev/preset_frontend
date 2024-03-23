@@ -49,7 +49,7 @@ const PlotPage = () => {
         <div className="result-div">
             <h2>Context Analytics</h2>
             <div id='content'>
-            <div id="additional-words">
+            <div style={{padding: "1rem"}}>
                 <p id = "choose_words">Choose the word to build the graph:</p>
                 <select
                     id="search_word"
@@ -69,7 +69,7 @@ const PlotPage = () => {
             </div>
             {selectedWord && (
                 <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
-                    {plot.length == 0? <p>This word is not frequent enough or not present.<br/> Please try another word.</p> : <Plot data={plot} layout={{ width: 600, height: 300, title: `Context for "${selectedWord}"` }} />}
+                    {plot.length == 0? <p>This word is not frequent enough or not present.<br/> Please try another word.</p> : <Plot data={plot} layout={{title: `Context for "${selectedWord}"` }} useResizeHandler={true} style={{width: '100%', height: '100%'}} />}
                 </div>
             )}
             </div>

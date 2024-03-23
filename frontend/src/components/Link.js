@@ -71,7 +71,7 @@ const Link = () => {
     return (
         <div className='upload-input'>
             <div className='upload-content'>
-                <input type="text" placeholder="Link" ref={linkInput} onChange={handleInputChange} style={{ width: "90%", border: "1px solid #685E5E", padding: "8px", borderRadius: "5px" }} />
+                <input type="text" placeholder="Link" ref={linkInput} onChange={handleInputChange} style={{ minWidth: "322px", width: "90%", border: "1px solid #685E5E", padding: "8px", borderRadius: "5px" }} />
             </div>
             <button onClick={fetchData} disabled={!linkUploaded}>Get the keywords</button>
             {isLoading && (

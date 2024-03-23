@@ -23,16 +23,16 @@ function App() {
   const [csvUrl, setURL]          = useState('#');
   
   return (
-    <div className="grid-container">
       <AppContext.Provider value={{addedWords, setWords, file_path, setPath, keywordsFetched, setKeywordsFetched, kiwiTable, setKiwiTable, header, setHeader, table, setTable, grasp, setGrasp, matrix, setMatrix, csvUrl, setURL}}>
         <Navbar />
+        <div className="grid-container">
         <Previous />
         <div className="content-container">
           <UploadScreen />
           <Results/>
         </div>
+        </div>
       </AppContext.Provider>
-    </div>
   );
 }
 

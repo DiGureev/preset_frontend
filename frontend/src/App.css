@@ -69,11 +69,15 @@
 }
 
 #toggle-btn-div {
-  width: 60%;
+  width: 80%;
   margin: auto;
-  margin-top: 4rem;
   text-align: center;
+  display: flex;
+  padding-top: 2rem;
+  justify-content: center;
 }
+
+
 
 #nav-buttons {
   display: flex;
@@ -144,6 +148,7 @@
 @media screen and (max-width: 768px) {
   .grid-container {
     grid-template-columns: 1fr;
+    padding: 10px;
   }
 }
 
@@ -176,27 +181,15 @@ h1 {
   align-items: center;
   justify-content: center;
   margin: auto;
-  min-width: 378px;
   margin-bottom: 15px;
 }
+
+
 
 .introText{
   color: white;
   margin-bottom: 15px;
   text-align: center;
-}
-
-@media only screen and (max-width: 768px) {
-  .upload-input {
-    width: 70%;
-    margin-bottom: 15px;
-  }
-
-  .upload-content {
-    width: 70%;
-    margin-bottom: 15px;
-    margin-top: 15px;
-  }  
 }
 
 .result-div {
@@ -218,9 +211,16 @@ h1 {
 
 #additional-words {
   display: flex;
+  width: 60%;
+  margin: auto;
   flex-wrap: wrap;
   flex-direction: column;
   padding: 1rem;
+}
+
+#download_csv a {
+  color: white;
+  text-decoration: none;
 }
 
 #choose_words{
@@ -233,9 +233,10 @@ h1 {
 }
 
 #content {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: auto;
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: center;
   padding-bottom: 1rem;
   padding-top: 1rem;
   margin: auto;
@@ -255,4 +256,29 @@ table thead tr:first-child th {
   position: sticky;
   top: 0px;
   background-color: #afc8f0;
+}
+
+@media only screen and (max-width: 768px) {
+  .upload-input {
+    width: 70%;
+    margin-bottom: 15px;
+  }
+
+  .upload-content {
+    width: 70%;
+    margin-bottom: 15px;
+    margin-top: 15px;
+  }  
+
+  #content {
+    flex-direction: column;
+  }
+
+  #previous-div {
+    margin: 1rem;
+  }
+
+  #previous-btn {
+    font-size: 80%;
+  }
 }
