@@ -27,7 +27,7 @@ const File = () => {
     const handleFileChange = (file) => {
         if (file) {
             setMsg('');
-            console.log(file);
+            // console.log(file);
             setFile(file);
         }
     };
@@ -53,7 +53,6 @@ const File = () => {
             const path = response.data.path;
 
             setHeader('Here are the keywords from your file:');
-            console.log(keywords)
             setKiwiTable(keywords);
             download(keywords)
             setPath(path);

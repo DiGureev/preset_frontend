@@ -18,13 +18,10 @@ const WordTable = ( ) => {
                   path: file_path
                 };
 
-      console.log(body)
-
       try {
           const response  = await axios.post(`${url}add`, body);
           let data        = response.data;
           const keywords  = data.kiwi_table;
-          console.log(keywords)
           setKiwiTable(keywords);
           // To clean input field
           additionalWords.current.value = '';
