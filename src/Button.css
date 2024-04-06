@@ -1,0 +1,26 @@
+/* Default style for enabled button */
+button {
+    width: 50%;
+    margin: auto;
+    padding: 10px;
+    background-color: #23C684;
+    border: 0;
+    border-radius: 5px;
+    margin-top: 1rem;
+    text-transform: uppercase;
+    color: #0C193F;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+button:disabled {
+    background-color: #b3cbc2;
+    color: #646b7f;
+    cursor: not-allowed;
+}
+
+@media only screen and (max-width: 768px) {
+    button {
+        width: 80%;
+    }
+}
