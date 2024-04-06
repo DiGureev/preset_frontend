@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
-import { AppContext } from '../App';
+import { AppContext } from '../App.js';
 import '../App.css';
 
 const NavButtons = () => {
