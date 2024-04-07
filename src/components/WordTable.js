@@ -41,13 +41,15 @@ const WordTable = ( ) => {
               <tr>
                 <th>Word</th>
                 <th>Pages</th>
+                <th>Relative Frequency</th>
               </tr>
             </thead>
             <tbody>
               {kiwiTable.map((item, index) => (
                 <tr key={index}>
                   <td>{item.Word}</td>
-                  <td>{item.Pages}</td>
+                  <td>{item.Pages.Pages.join(", ")}</td>
+                  <td>{item.Pages.RelativeFrequency}</td>
                 </tr>
               ))}
             </tbody>
