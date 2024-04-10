@@ -29,7 +29,7 @@ const Link = () => {
             } else {
                 const keywords = data.kiwi_table;
                 const path = data.path;
-                setHeader('Here are the keywords from your file:');
+                setHeader('Dive-In Reading');
                 setKiwiTable(keywords);
                 download(keywords);
                 setPath(path);
