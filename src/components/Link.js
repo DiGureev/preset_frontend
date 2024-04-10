@@ -9,7 +9,7 @@ const Link = () => {
     const linkInput = useRef('');
     const [linkUploaded, setLinkUploaded] = useState(true);
     const [isLoading, setIsLoading] = useState(false); 
-    const { setDocName, setPath, setKeywordsFetched, setKiwiTable, setHeader, setTable, setURL } = useContext(AppContext);
+    const { download, setDocName, setPath, setKeywordsFetched, setKiwiTable, setHeader, setTable } = useContext(AppContext);
     const { url, setMsg } = useContext(UploadContext);
 
     useEffect(() => {
@@ -38,7 +38,6 @@ const Link = () => {
                 let link = linkInput.current.value
                 let pathArr = link.split("/")
                 link = pathArr.slice(-1)[0]
-                console.log(link)
                 let name = link.split(".")[0]
                 name += '-Kiwi.csv'
 
@@ -55,25 +54,36 @@ const Link = () => {
         }
     }
 
-    const download = (dataTable) => {
-        const CSVRows = [];
-        const keys = "Word, Page";
-        CSVRows.push(keys);
-        let values = [];
-  
-        for (let obj of dataTable){
-          let value = Object.values(obj).join(",");
-          values.push(value);
-        }
+    // const download = (dataTable) => {
+    //     let newDataTable = []
+
+    //     // Make proper table for cvs generating
+    //     for (let i of dataTable){
+    //         let newObj = {}
+    //         newObj.Word = i.Word
+    //         newObj.Pages = i.Pages.Pages.toString()
+    //         newObj.Freq = i.Pages.RelativeFrequency
+    //         newDataTable.push(newObj)
+    //     }
         
-        values = values.join('\n');
-        CSVRows.push(values);
-        let data = CSVRows.join('\n');
-        const blob = new Blob([data], { type: 'text/csv' }); 
-        const url = window.URL.createObjectURL(blob) ;
+    //     const CSVRows = [];
+    //     const keys = "Word, Page, Relative Frequency";
+    //     CSVRows.push(keys);
+    //     let values = [];
+  
+    //     for (let obj of newDataTable){
+    //       let value = Object.values(obj).join(";");
+    //       values.push(value);
+    //     }
+        
+    //     values = values.join('\n');
+    //     CSVRows.push(values);
+    //     let data = CSVRows.join('\n');
+    //     const blob = new Blob([data], { type: 'text/csv' }); 
+    //     const url = window.URL.createObjectURL(blob) ;
           
-        setURL(url);
-    }
+    //     setURL(url);
+    // }
 
     const handleInputChange = (event) => {
         setLinkUploaded(!!event.target.value.trim());

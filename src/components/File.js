@@ -13,7 +13,7 @@ const File = () => {
     const [isButtonDisabled, setIsButtonDisabled] = useState(true);
     const [isLoading, setIsLoading] = useState(false); 
 
-    const { setDocName, setPath, setKeywordsFetched, setKiwiTable, setHeader, setTable, setURL } = useContext(AppContext);
+    const { download, setDocName, setPath, setKeywordsFetched, setKiwiTable, setHeader, setTable } = useContext(AppContext);
     const { url, setMsg } = useContext(UploadContext);
 
     useEffect(() => {
@@ -58,8 +58,6 @@ const File = () => {
             const keywords = response.data.kiwi_table;
             const path = response.data.path;
 
-            console.log(keywords)
-
             setHeader('Here are the keywords from your file:');
             setKiwiTable(keywords);
             download(keywords)
@@ -73,26 +71,6 @@ const File = () => {
             setIsLoading(false); 
         }
     };
-
-    const download = (dataTable) => {
-        const CSVRows = [];
-        const keys = "Word, Page";
-        CSVRows.push(keys);
-        let values = [];
-  
-        for (let obj of dataTable){
-          let value = Object.values(obj).join(",");
-          values.push(value);
-        }
-        
-        values = values.join('\n');
-        CSVRows.push(values);
-        let data = CSVRows.join('\n');
-        const blob = new Blob([data], { type: 'text/csv' }); 
-        const url = window.URL.createObjectURL(blob) ;
-          
-        setURL(url);
-    }
 
     return (
         <div className='upload-input'>
