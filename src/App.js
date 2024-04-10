@@ -48,7 +48,6 @@ function App() {
     values = values.join('\n');
     CSVRows.push(values);
     let data = CSVRows.join('\n');
-    console.log(data)
     const blob = new Blob([data], { type: 'text/csv' }); 
     const url = window.URL.createObjectURL(blob) ;
       
