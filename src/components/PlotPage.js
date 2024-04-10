@@ -47,9 +47,11 @@ const PlotPage = () => {
 
     return (
         <div className="result-div">
-            <h2>Context Analytics</h2>
+            <h2>Grasping the Context</h2>
             <div id='content'>
             <div style={{padding: "1rem"}}>
+                <p>To get a quick glimpse of the context before diving deep into the reading, use a keyword to gather the pieces of information together.
+                Examine the context with the keyword co-occurrence plot. Type in your own word or choose one from the KEWI list.</p>
                 <p id = "choose_words">Choose the word to build the graph:</p>
                 <select
                     id="search_word"

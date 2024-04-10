@@ -13,7 +13,7 @@ const File = () => {
     const [isButtonDisabled, setIsButtonDisabled] = useState(true);
     const [isLoading, setIsLoading] = useState(false); 
 
-    const { setPath, setKeywordsFetched, setKiwiTable, setHeader, setTable, setURL } = useContext(AppContext);
+    const { setDocName, setPath, setKeywordsFetched, setKiwiTable, setHeader, setTable, setURL } = useContext(AppContext);
     const { url, setMsg } = useContext(UploadContext);
 
     useEffect(() => {
@@ -43,6 +43,12 @@ const File = () => {
         let formData = new FormData();
         formData.append('file', file);
 
+        // Get Name for downloading .csv
+        let fileName = file.name 
+        let name = fileName.split(".")[0]
+        name+= '-Kiwi.csv'
+        setDocName(name)
+
         try {
             const response = await axios.post(`${url}upload/`, formData, {
                 headers: {
@@ -51,6 +57,8 @@ const File = () => {
             });
             const keywords = response.data.kiwi_table;
             const path = response.data.path;
+
+            console.log(keywords)
 
             setHeader('Here are the keywords from your file:');
             setKiwiTable(keywords);

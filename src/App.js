@@ -21,9 +21,10 @@ function App() {
   const [grasp, setGrasp]         = useState(false);
   const [matrix, setMatrix]       = useState(false);
   const [csvUrl, setURL]          = useState('#');
+  const [docName, setDocName]     = useState('')
   
   return (
-      <AppContext.Provider value={{addedWords, setWords, file_path, setPath, keywordsFetched, setKeywordsFetched, kiwiTable, setKiwiTable, header, setHeader, table, setTable, grasp, setGrasp, matrix, setMatrix, csvUrl, setURL}}>
+      <AppContext.Provider value={{docName, setDocName, addedWords, setWords, file_path, setPath, keywordsFetched, setKeywordsFetched, kiwiTable, setKiwiTable, header, setHeader, table, setTable, grasp, setGrasp, matrix, setMatrix, csvUrl, setURL}}>
         <Navbar />
         <div className="grid-container">
         <Previous />

@@ -9,7 +9,7 @@ const Link = () => {
     const linkInput = useRef('');
     const [linkUploaded, setLinkUploaded] = useState(true);
     const [isLoading, setIsLoading] = useState(false); 
-    const { setPath, setKeywordsFetched, setKiwiTable, setHeader, setTable, setURL } = useContext(AppContext);
+    const { setDocName, setPath, setKeywordsFetched, setKiwiTable, setHeader, setTable, setURL } = useContext(AppContext);
     const { url, setMsg } = useContext(UploadContext);
 
     useEffect(() => {
@@ -33,6 +33,17 @@ const Link = () => {
                 setKiwiTable(keywords);
                 download(keywords);
                 setPath(path);
+
+                // Get Name for downloading .csv
+                let link = linkInput.current.value
+                let pathArr = link.split("/")
+                link = pathArr.slice(-1)[0]
+                console.log(link)
+                let name = link.split(".")[0]
+                name += '-Kiwi.csv'
+
+                setDocName(name)
+
                 setKeywordsFetched(true);
                 setTable(true);
                 linkInput.current.value = ''

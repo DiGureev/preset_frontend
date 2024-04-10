@@ -8,7 +8,7 @@ import '../App.css';
 const url = process.env.REACT_APP_API_URL;
 
 const WordTable = ( ) => {
-    const {kiwiTable, setKiwiTable, file_path, header, setWords, csvUrl} = useContext(AppContext);
+    const {docName, kiwiTable, setKiwiTable, file_path, header, setWords, csvUrl} = useContext(AppContext);
     const additionalWords = useRef('');
 
     const addWords = async () => {
@@ -62,7 +62,7 @@ const WordTable = ( ) => {
         </div>
         </div>
 
-        <button id="download_csv"><a href={csvUrl} download="word-table.csv">Download table (CSV)</a></button>
+        <button id="download_csv"><a href={csvUrl} download={docName}>Download table (CSV)</a></button>
         <NavButtons/>
       </div>
     )
