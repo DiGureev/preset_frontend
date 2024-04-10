@@ -40,14 +40,7 @@ const Matrix = () => {
 
     return (
         <div className="result-div">
-            <h2>Dive-In Reading</h2>
-                <div style={{padding: "1rem", maxWidth: "800px", margin: "auto"}}>
-                    <p>
-                    To navigate your reading, accelerate the search, and help trans-references, use keyword index (KeWI) generator.
-                    Learn the top words and use the right vocabulary in your questions. If needed, you can add your own words to the KeWI.
-                    <i>(Note that family words are combined, i.e. "invest" is added for [investment, investor, investing,..]).</i>
-                    </p>
-                </div>
+            <h2>From Text-base to Knowledge-base</h2>
                 <div style={{display: "flex", justifyContent: "center"}}>
                     <ForceGraph2D
                         graphData={matrix}

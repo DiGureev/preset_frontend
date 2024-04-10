@@ -58,7 +58,7 @@ const File = () => {
             const keywords = response.data.kiwi_table;
             const path = response.data.path;
 
-            setHeader('Here are the keywords from your file:');
+            setHeader('Dive-In Reading');
             setKiwiTable(keywords);
             download(keywords)
             setPath(path);

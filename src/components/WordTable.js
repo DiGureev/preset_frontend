@@ -56,6 +56,10 @@ const WordTable = ( ) => {
           </Table>
           </div>
         <div  id="additional-words">
+          <p>To navigate your reading, accelerate the search, and help trans-references, use keyword index (KeWI) generator. 
+          Learn the top words and use the right vocabulary in your questions. If needed, you can add your own words to the KeWI.
+          <i>(Note that family words are combined, i.e. "invest" is added for [investment, investor, investing,..]).</i></p>
+          
           <p>If you would like to add additional words, please enter them here. <br/> Example: word1, word2</p>
           <input id="additional-words-input" type="text" ref={additionalWords}/>
           <button id="additional-words-btn" onClick={addWords}>Add words to the table</button>
