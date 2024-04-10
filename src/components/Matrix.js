@@ -41,8 +41,7 @@ const Matrix = () => {
     return (
         <div className="result-div">
             <h2>Dive-In Reading</h2>
-            <div id='content'>
-                <div style={{padding: "1rem"}}>
+                <div style={{padding: "1rem", maxWidth: "800px", margin: "auto"}}>
                     <p>
                     To navigate your reading, accelerate the search, and help trans-references, use keyword index (KeWI) generator.
                     Learn the top words and use the right vocabulary in your questions. If needed, you can add your own words to the KeWI.
@@ -82,7 +81,6 @@ const Matrix = () => {
                         }}
                     />
                 </div>
-            </div>
             <NavButtons/>
         </div>
     )
