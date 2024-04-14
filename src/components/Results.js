@@ -2,10 +2,12 @@ import { useContext } from "react";
 import { AppContext } from "../App.js";
 import PlotPage from "./PlotPage.js";
 import WordTable from "./WordTable.js";
-import Matrix from "./Matrix.js";
+import NetworkPlot from "./NetworkPlot.js";
 
 const Results = () => {
     const {table, grasp, matrix} = useContext(AppContext)
+
+    // Render correct component depends on user choice
     if (table == true) {
         return (
         <WordTable/>)
@@ -15,7 +17,7 @@ const Results = () => {
         )
     } else if (matrix == true) {
         return (
-        <Matrix/>
+        <NetworkPlot/>
         )
     }
 }

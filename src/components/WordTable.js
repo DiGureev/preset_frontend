@@ -23,6 +23,7 @@ const WordTable = ( ) => {
           let data        = response.data;
           const keywords  = data.kiwi_table;
           setKiwiTable(keywords);
+
           // To clean input field
           additionalWords.current.value = '';
         } catch (error) {
@@ -33,9 +34,10 @@ const WordTable = ( ) => {
 
     return (
       <div className="result-div">
-        <h2>{header}</h2>
+        <h2>Dive-In Reading</h2>
         <div id='content'>
         <div id='table-content'>
+          {/* Main table */}
           <Table striped bordered hover size="sm" responsive>
             <thead>
               <tr>
@@ -45,6 +47,7 @@ const WordTable = ( ) => {
               </tr>
             </thead>
             <tbody>
+              {/* Rows */}
               {kiwiTable.map((item, index) => (
                 <tr key={index}>
                   <td>{item.Word}</td>
@@ -65,8 +68,11 @@ const WordTable = ( ) => {
           <button id="additional-words-btn" onClick={addWords}>Add words to the table</button>
         </div>
         </div>
-
+        
+        {/* Download CSV button */}
         <button id="download_csv"><a href={csvUrl} download={docName}>Download table (CSV)</a></button>
+        
+        {/* The buttons at the bottom of the page to switch between the components */}
         <NavButtons/>
       </div>
     )

@@ -10,10 +10,12 @@ const fileTypes = ["PDF"];
 
 const File = () => {
     const [file, setFile] = useState('');
+    // disable the button if nothing uploaded
     const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+    // to show loading div while loading
     const [isLoading, setIsLoading] = useState(false); 
 
-    const { download, setDocName, setPath, setKeywordsFetched, setKiwiTable, setHeader, setTable } = useContext(AppContext);
+    const { download, setDocName, setPath, setKeywordsFetched, setKiwiTable, setTable } = useContext(AppContext);
     const { url, setMsg } = useContext(UploadContext);
 
     useEffect(() => {
@@ -27,7 +29,6 @@ const File = () => {
     const handleFileChange = (file) => {
         if (file) {
             setMsg('');
-            // console.log(file);
             setFile(file);
         }
     };
@@ -58,12 +59,14 @@ const File = () => {
             const keywords = response.data.kiwi_table;
             const path = response.data.path;
 
-            setHeader('Dive-In Reading');
             setKiwiTable(keywords);
+
             download(keywords)
+
             setPath(path);
             setKeywordsFetched(true);
             setTable(true);
+
             setFile('')
         } catch (error) {
             console.error('There was an error:', error);
@@ -79,6 +82,7 @@ const File = () => {
                 <div style={{ marginTop: "10px", fontSize: "0.8rem" }}>{file && `${file.name} - ${file.type}`}</div>
             </div>
             <button onClick={handleUploadClick} disabled={isButtonDisabled}>Get the keywords</button>
+            {/* Loading process div */}
             {isLoading && (
                 <div className="loading-container">
                     <div className="loading-spinner"></div>

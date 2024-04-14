@@ -7,9 +7,11 @@ import NavButtons from "./NavButtons.js";
 
 const url = process.env.REACT_APP_API_URL;
 
-const Matrix = () => {
+const NetworkPlot = () => {
     const [matrix, setMat] = useState({ nodes: [], links: [] });
     const { file_path, addedWords} = useContext(AppContext);
+
+    // Dependency for making networkplot width
     const [displayWidth, setDisplayWidth] = useState(window.innerWidth);
 
     useEffect(()=> {
@@ -26,9 +28,12 @@ const Matrix = () => {
             const response = await axios.post(`${url}matrix`, body);
             let data = response.data;
             const mat = JSON.parse(data.matrix);
+
+            // Make a correct object for networkplot creating
             const obj = {};
             obj["nodes"] = mat.nodes;
             obj["links"] = mat.links;
+
             setMat(obj);
 
         } catch (error) {
@@ -74,9 +79,10 @@ const Matrix = () => {
                         }}
                     />
                 </div>
+            {/* The buttons at the bottom of the page to switch between the components */}
             <NavButtons/>
         </div>
     )
 }
 
-export default Matrix;
+export default NetworkPlot;

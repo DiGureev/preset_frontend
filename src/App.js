@@ -4,25 +4,30 @@ import UploadScreen from './components/UploadScreen.js';
 import Navbar from './components/Navbar.js';
 import Previous from './components/Previous.js';
 import { useState, createContext } from 'react';
-import PlotPage from './components/PlotPage.js';
-import Matrix from './components/Matrix.js';
 import Results from './components/Results.js';
 
 export const AppContext = createContext();
 
 function App() {
+  // The words user added to the kiWI or plot
   const [addedWords, setWords]    = useState('');
+  // Path to the file user uploaded
   const [file_path, setPath]      = useState('');
   const [keywordsFetched, 
          setKeywordsFetched]      = useState(false);
+  // The main table
   const [kiwiTable, setKiwiTable] = useState([]);
-  const [header, setHeader]       = useState('');
+
+  // To know which component need to be rendered
   const [table, setTable]         = useState(false);
   const [grasp, setGrasp]         = useState(false);
   const [matrix, setMatrix]       = useState(false);
+
+  // url for downloading CSV and set name of the document
   const [csvUrl, setURL]          = useState('#');
   const [docName, setDocName]     = useState('')
 
+  // function for generating CVS
   const download = (dataTable) => {
     let newDataTable = []
 
@@ -48,14 +53,16 @@ function App() {
     values = values.join('\n');
     CSVRows.push(values);
     let data = CSVRows.join('\n');
+
     const blob = new Blob([data], { type: 'text/csv' }); 
     const url = window.URL.createObjectURL(blob) ;
-      
+    
+    // Set CSV URL for downloading
     setURL(url);
 }
   
   return (
-      <AppContext.Provider value={{download, docName, setDocName, addedWords, setWords, file_path, setPath, keywordsFetched, setKeywordsFetched, kiwiTable, setKiwiTable, header, setHeader, table, setTable, grasp, setGrasp, matrix, setMatrix, csvUrl, setURL}}>
+      <AppContext.Provider value={{download, docName, setDocName, addedWords, setWords, file_path, setPath, keywordsFetched, setKeywordsFetched, kiwiTable, setKiwiTable, table, setTable, grasp, setGrasp, matrix, setMatrix, csvUrl, setURL}}>
         <Navbar />
         <div className="grid-container">
         <Previous />
