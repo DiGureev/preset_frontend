@@ -7,9 +7,12 @@ import '../Button.css';
 
 const Link = () => {
     const linkInput = useRef('');
+    // disable the button if nothing uploaded
     const [linkUploaded, setLinkUploaded] = useState(true);
+    // to show loading div while loading
     const [isLoading, setIsLoading] = useState(false); 
-    const { download, setDocName, setPath, setKeywordsFetched, setKiwiTable, setHeader, setTable } = useContext(AppContext);
+
+    const { download, setDocName, setPath, setKeywordsFetched, setKiwiTable, setTable } = useContext(AppContext);
     const { url, setMsg } = useContext(UploadContext);
 
     useEffect(() => {
@@ -29,7 +32,7 @@ const Link = () => {
             } else {
                 const keywords = data.kiwi_table;
                 const path = data.path;
-                setHeader('Dive-In Reading');
+
                 setKiwiTable(keywords);
                 download(keywords);
                 setPath(path);
@@ -54,37 +57,6 @@ const Link = () => {
         }
     }
 
-    // const download = (dataTable) => {
-    //     let newDataTable = []
-
-    //     // Make proper table for cvs generating
-    //     for (let i of dataTable){
-    //         let newObj = {}
-    //         newObj.Word = i.Word
-    //         newObj.Pages = i.Pages.Pages.toString()
-    //         newObj.Freq = i.Pages.RelativeFrequency
-    //         newDataTable.push(newObj)
-    //     }
-        
-    //     const CSVRows = [];
-    //     const keys = "Word, Page, Relative Frequency";
-    //     CSVRows.push(keys);
-    //     let values = [];
-  
-    //     for (let obj of newDataTable){
-    //       let value = Object.values(obj).join(";");
-    //       values.push(value);
-    //     }
-        
-    //     values = values.join('\n');
-    //     CSVRows.push(values);
-    //     let data = CSVRows.join('\n');
-    //     const blob = new Blob([data], { type: 'text/csv' }); 
-    //     const url = window.URL.createObjectURL(blob) ;
-          
-    //     setURL(url);
-    // }
-
     const handleInputChange = (event) => {
         setLinkUploaded(!!event.target.value.trim());
     };
@@ -95,6 +67,7 @@ const Link = () => {
                 <input type="text" placeholder="Link" ref={linkInput} onChange={handleInputChange} style={{ minWidth: "322px", width: "90%", border: "1px solid #685E5E", padding: "8px", borderRadius: "5px" }} />
             </div>
             <button onClick={fetchData} disabled={!linkUploaded}>Get the keywords</button>
+            {/* Loading process div */}
             {isLoading && (
                 <div className="loading-container">
                     <div className="loading-spinner"></div>
