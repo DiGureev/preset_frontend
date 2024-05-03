@@ -1,11 +1,23 @@
 import React from 'react';
-import '../App.css';
+import './Navbar.css';
+import Logo from '../img/logo.svg';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser } from '@fortawesome/free-solid-svg-icons'
+import { Link } from 'react-router-dom';
+
 
 const Navbar = () => {
     return (
-        <nav className="navbar navbar-light custom-navbar-bg">
-            {/* logo */}
-            <img src='logo.png' alt="Logo" width="auto" height="100%" className="d-inline-block align-top" />
+        <nav className="navbar">
+            <Link to="/" className='logo'><img src={Logo} alt="priset-logo" /></Link>
+            <div id='navbar-items'>
+                <Link to="/analytics"><div className='menu-item'>PRI Analytics</div></Link>
+                <div className='menu-item'>Contact Us</div>
+            </div>
+            <div className='username'>
+                <div id='username-icon'><FontAwesomeIcon icon={faUser} /></div>
+                <div>Hello, Username</div>
+            </div>
         </nav>
     );
 }

@@ -1,0 +1,48 @@
+* {
+    box-sizing: border-box;
+}
+
+.navbar {
+    height: 100px;
+    width: 100vw;
+    background-color: #E0E7FB;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+}
+
+.logo {
+    width: 30%;
+}
+
+#navbar-items {
+    display: flex;
+    flex-direction: row;
+    width: 30%;
+    justify-content: space-around;
+}
+
+.menu-item {
+    border: 3px solid rgba(0, 0, 0, 0);
+    font-size: 1.2rem;
+}
+
+.menu-item:hover {
+    border-bottom: solid 3px #2B58E1;
+}
+
+.username {
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+#username-icon {
+    margin-right: 10px;
+}

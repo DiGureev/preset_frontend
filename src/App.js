@@ -1,10 +1,14 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import UploadScreen from './components/UploadScreen.js';
 import Navbar from './components/Navbar.js';
-import Previous from './components/Previous.js';
 import { useState, createContext } from 'react';
-import Results from './components/Results.js';
+import Reg from './components/Reg.js';
+import Log from './components/Log.js';
+import Logout from './components/Logout.js';
+import Analytics from './components/Analytics.js'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './components/Home.js'
+import Auth from './components/CheckAuth.js'
 
 export const AppContext = createContext();
 
@@ -63,14 +67,20 @@ function App() {
   
   return (
       <AppContext.Provider value={{download, docName, setDocName, addedWords, setWords, file_path, setPath, keywordsFetched, setKeywordsFetched, kiwiTable, setKiwiTable, table, setTable, grasp, setGrasp, matrix, setMatrix, csvUrl, setURL}}>
-        <Navbar />
-        <div className="grid-container">
-        <Previous />
-        <div className="content-container">
-          <UploadScreen />
-          <Results/>
-        </div>
-        </div>
+        <Router>
+          <div>
+            <Navbar />
+            <Reg/>
+            <Log/>
+            <Logout/>
+            <Auth/>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/analytics" element={<Analytics/>} />
+              {/* You can add more routes here */}
+            </Routes>
+          </div>
+        </Router>
       </AppContext.Provider>
   );
 }
