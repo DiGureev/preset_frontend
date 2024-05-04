@@ -35,7 +35,7 @@ const Home = () => {
             <p className="text">
             Transition to carbon neutrality opens new opportunities and threatens slowly-changing businesses. Project success or company survival depends on identifying and pursuing the opportunities communicated by new policies and regulations. New technology and research can accelerate the transition. Pri-SET helps track and find opportunities for sustainable energy projects around the globe. Helping you reach SDG goals defined by UN.
             </p>
-            <button className="button"><a href='#contacts'>Contact Us</a></button>
+            <button className="button"><a href='#contacts' style={{color:"white"}}>Contact Us</a></button>
             <div id="line"></div>
         </div>
         <div id="clients">

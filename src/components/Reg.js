@@ -1,5 +1,7 @@
-import { useRef } from "react";
+import { useRef, useContext } from "react";
 import axios from "axios";
+import { AppContext } from "../App";
+
 
 const url = process.env.REACT_APP_USER_URL;
 
@@ -7,6 +9,7 @@ const Reg = () => {
     const username = useRef('')
     const email = useRef('')
     const password = useRef('')
+    const {setUsername} = useContext(AppContext)
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -14,6 +17,8 @@ const Reg = () => {
         let usernameValue = username.current.value
         let emailValue = email.current.value
         let passwordValue = password.current.value
+
+        setUsername(usernameValue)
 
         let body = {
             username: usernameValue,

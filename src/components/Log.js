@@ -1,11 +1,14 @@
-import { useRef } from "react";
-import axios from "axios";
+import { useRef, useContext , useState} from "react";
+import { AppContext } from "../App";
+
 
 const url = process.env.REACT_APP_USER_URL;
 
 const Log = () => {
     const email = useRef('')
     const password = useRef('')
+    const {setLog} = useContext(AppContext)
+    const [msg, setMsg] = useState("")
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -23,7 +26,6 @@ const Log = () => {
     }
 
     const register = async (body, csrfToken) => {
-        // var csrftoken = getCookie('csrftoken');
 
         let res = await fetch(`${url}log-in/`, {
             method: 'POST',
@@ -35,8 +37,13 @@ const Log = () => {
                 credentials: 'include', // Include cookies in cross-origin requests
                 body: JSON.stringify(body)
         })
-        .then(response => response.json())
-        .then(json => console.log(json))
+        .then(response => {
+            if (response.status === 200){
+                setLog(true)
+            } else {
+                setMsg("Wrong password or user doesn't exist")
+            }
+        })
         .catch(error => {
             console.error('Error during login request:', error);
         });
@@ -65,7 +72,7 @@ const getCookie = async (body) => {
             <input placeholder="email" ref={email}/>
             <input placeholder="password" ref={password}/>
             <button>Submit</button>
-
+            <p>{msg}</p>
         </form>
     )
 }

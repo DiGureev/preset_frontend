@@ -31,7 +31,10 @@ function App() {
   // url for downloading CSV and set name of the document
   const [csvUrl, setURL]          = useState('#');
   const [docName, setDocName]     = useState('')
-  const [logged, setLog]     = useState('')
+
+  // Registration and auth
+  const [logged, setLog]        = useState(false)
+  const [username, setUsername] = useState('')
 
   // function for generating CVS
   const download = (dataTable) => {
@@ -68,7 +71,7 @@ function App() {
 }
   
   return (
-      <AppContext.Provider value={{logged, setLog, download, docName, setDocName, addedWords, setWords, file_path, setPath, keywordsFetched, setKeywordsFetched, kiwiTable, setKiwiTable, table, setTable, grasp, setGrasp, matrix, setMatrix, csvUrl, setURL}}>
+      <AppContext.Provider value={{username, setUsername, logged, setLog, download, docName, setDocName, addedWords, setWords, file_path, setPath, keywordsFetched, setKeywordsFetched, kiwiTable, setKiwiTable, table, setTable, grasp, setGrasp, matrix, setMatrix, csvUrl, setURL}}>
         <Router>
           <div>
             <Navbar />

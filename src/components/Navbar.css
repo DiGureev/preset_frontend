@@ -27,7 +27,7 @@
     font-size: 1.2rem;
 }
 
-.menu-item:hover {
+.menu-item:hover, .username a:hover {
     border-bottom: solid 3px #2B58E1;
 }
 
@@ -38,10 +38,15 @@
     font-size: 1.2rem;
 }
 
+.username p {
+    margin: 0;
+}
+
 a {
     text-decoration: none;
     color: black;
 }
+
 
 #username-icon {
     margin-right: 10px;
