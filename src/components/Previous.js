@@ -1,5 +1,11 @@
+import { useContext } from "react";
+import { AppContext } from "../App";
+
+
 const Previous = () => {
-    return (
+    const {logged} = useContext(AppContext)
+
+    if (logged) { return (
         <div id="previous-div">
             <div style={{width: "30%", textAlign: "left", marginLeft: "20%"}}>
             <h3>Recent</h3>
@@ -11,7 +17,7 @@ const Previous = () => {
             </button>
             </div>
         </div>
-    )
+    )}
 }
 
 export default Previous

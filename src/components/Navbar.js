@@ -12,7 +12,7 @@ const Navbar = () => {
             <Link to="/" className='logo'><img src={Logo} alt="priset-logo" /></Link>
             <div id='navbar-items'>
                 <Link to="/analytics"><div className='menu-item'>PRI Analytics</div></Link>
-                <div className='menu-item'>Contact Us</div>
+                <Link to="/contacts"><div className='menu-item'>Contact Us</div></Link>
             </div>
             <div className='username'>
                 <div id='username-icon'><FontAwesomeIcon icon={faUser} /></div>

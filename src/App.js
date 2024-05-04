@@ -9,6 +9,7 @@ import Analytics from './components/Analytics.js'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './components/Home.js'
 import Auth from './components/CheckAuth.js'
+import Contacts from './components/Contacts.js';
 
 export const AppContext = createContext();
 
@@ -30,6 +31,7 @@ function App() {
   // url for downloading CSV and set name of the document
   const [csvUrl, setURL]          = useState('#');
   const [docName, setDocName]     = useState('')
+  const [logged, setLog]     = useState('')
 
   // function for generating CVS
   const download = (dataTable) => {
@@ -66,18 +68,18 @@ function App() {
 }
   
   return (
-      <AppContext.Provider value={{download, docName, setDocName, addedWords, setWords, file_path, setPath, keywordsFetched, setKeywordsFetched, kiwiTable, setKiwiTable, table, setTable, grasp, setGrasp, matrix, setMatrix, csvUrl, setURL}}>
+      <AppContext.Provider value={{logged, setLog, download, docName, setDocName, addedWords, setWords, file_path, setPath, keywordsFetched, setKeywordsFetched, kiwiTable, setKiwiTable, table, setTable, grasp, setGrasp, matrix, setMatrix, csvUrl, setURL}}>
         <Router>
           <div>
             <Navbar />
-            <Reg/>
-            <Log/>
-            <Logout/>
-            <Auth/>
+            {/* <Logout/>
+            <Auth/> */}
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/analytics" element={<Analytics/>} />
-              {/* You can add more routes here */}
+              <Route path="/signup" element={<Reg/>} />
+              <Route path="/login" element={<Log/>} />
+              <Route path="/contacts" element={<Contacts/>} />
             </Routes>
           </div>
         </Router>
