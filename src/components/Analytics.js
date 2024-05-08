@@ -1,4 +1,4 @@
-import UploadScreen from './UploadScreen.js';
+import UploadScreen from './PRIAnalyticsPage/UploadScreen.js';
 import Previous from './Previous.js';
 import Results from './Results.js';
 

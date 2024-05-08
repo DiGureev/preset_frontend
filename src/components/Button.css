@@ -1,8 +1,7 @@
 /* Default style for enabled button */
 button {
     width: 30%;
-    margin: auto;
-    padding: 10px 12px;
+    padding: 12px 32px;
     background-color: #2B58E1;
     border: 0;
     border-radius: 6px;

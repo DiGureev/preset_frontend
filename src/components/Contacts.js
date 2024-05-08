@@ -1,4 +1,4 @@
-import './Home.css';
+import './HomePage/Home.css';
 
 const Contacts = () => {
 
@@ -9,7 +9,7 @@ const Contacts = () => {
     return (
         <div id="contacts">
             <div id="contacts-text">
-                <h2>Let’s Work Together</h2>
+                <h2>Let's Work Together</h2>
                 <p>Arcistrasse, Munich</p>
                 <p>www.priset.io</p>
             </div>

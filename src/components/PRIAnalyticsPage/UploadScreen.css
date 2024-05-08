@@ -1,0 +1,69 @@
+#upload-container {
+    padding: 40px;
+    position: relative;
+}
+
+#upload-container h1 {
+    text-align: left;
+    font-weight: 700;
+    font-size: 3rem;
+    margin-bottom: 3rem;
+    letter-spacing: 0.2vh;
+}
+
+#upload-container button {
+    width: fit-content;
+
+}
+
+#upload-main {
+    border: 2px solid rgba(43, 88, 255, .5);
+    height: 40vh;
+    border-radius: 6px;
+    font-size: 1.5rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center; 
+}
+
+#upload-main:hover {
+    border: 4px solid rgba(43, 88, 255, .5);
+
+}
+
+#upload-main p {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+#file-icon {
+    font-size: 5rem;
+    color: #2B58E1;
+}
+
+.link-file-container {
+    width: 50%;
+    min-width: 350px;
+    border: 2px solid rgba(43, 88, 255, .5);
+    background-color: white;
+    border-radius: 6px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 2rem;
+    padding-top: 0;
+
+  }
+
+  #close-upload {
+    text-align: right;
+    margin-right: 1rem;
+    cursor: pointer;
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
+
+  #close-upload:hover

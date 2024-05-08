@@ -1,11 +1,11 @@
 import React from 'react';
 import './Navbar.css';
-import Logo from '../img/logo.svg';
+import Logo from './img/logo.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom';
 import { useContext } from "react";
-import { AppContext } from "../App";
+import { AppContext } from "../../App";
 
 
 const Navbar = () => {
@@ -21,7 +21,7 @@ const Navbar = () => {
             {logged? <div className='username'>
                 <div id='username-icon'><FontAwesomeIcon icon={faUser} /></div>
                 <div>Hello, {username}</div>
-            </div> : <div className='username'><p><Link to="/login">Log in</Link> / <Link to="/signup">Sign Up</Link></p></div> }
+            </div> : <div className='username'><p><Link to="/login">Log In</Link> / <Link to="/signup">Sign Up</Link></p></div> }
         </nav>
     );
 }

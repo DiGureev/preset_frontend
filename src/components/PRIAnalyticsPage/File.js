@@ -1,10 +1,11 @@
 import axios from 'axios';
 import { useState, useContext, useEffect } from 'react';
 import { UploadContext } from './UploadScreen.js';
-import { AppContext } from '../App.js';
+import { AppContext } from '../../App.js';
 import { FileUploader } from "react-drag-drop-files";
 import '../Button.css';
-import '../App.css';
+import "./UploadScreen.css"
+
 
 const fileTypes = ["PDF"];
 

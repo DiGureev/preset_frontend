@@ -1,13 +1,13 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Navbar from './components/Navbar.js';
+import Navbar from './components/Navigation/Navbar.js';
 import { useState, createContext } from 'react';
 import Reg from './components/Reg.js';
 import Log from './components/Log.js';
 import Logout from './components/Logout.js';
 import Analytics from './components/Analytics.js'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from './components/Home.js'
+import Home from './components/HomePage/Home.js'
 import Auth from './components/CheckAuth.js'
 import Contacts from './components/Contacts.js';
 

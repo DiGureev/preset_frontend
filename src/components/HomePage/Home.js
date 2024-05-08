@@ -1,26 +1,26 @@
 import './Home.css';
-import accenture from '../img/cliens-icons/accenture.jpg';
-import eon from '../img/cliens-icons/eon.jpg';
-import linde from '../img/cliens-icons/linde.jpg';
-import mckinsey from '../img/cliens-icons/mckinsey.jpg';
-import quantum from '../img/cliens-icons/quantum.jpg';
-import swiim from '../img/cliens-icons/swiim.jpg';
-import azure from '../img/partnerships/azure.png';
-import openAi from '../img/partnerships/open-ai.png';
-import texas from '../img/partnerships/texas.png';
-import tum from '../img/partnerships/tum.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDatabase, faMagnifyingGlassChart, faSitemap, faEarthEurope, faPaperPlane } from '@fortawesome/free-solid-svg-icons'
-import Contacts from './Contacts';
+import { faDatabase, faMagnifyingGlassChart, faSitemap, faEarthEurope, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
+import Contacts from '../Contacts';
+import accenture from './img/cliens-icons/accenture.jpg';
+import eon from './img/cliens-icons/eon.jpg';
+import linde from './img/cliens-icons/linde.jpg';
+import mckinsey from './img/cliens-icons/mckinsey.jpg';
+import quantum from './img/cliens-icons/quantum.jpg';
+import swiim from './img/cliens-icons/swiim.jpg';
+import azure from './img/partnerships/azure.png';
+import openAi from './img/partnerships/open-ai.png';
+import texas from './img/partnerships/texas.png';
+import tum from './img/partnerships/tum.png';
 
+// Object with text for the page
 let data = require('./data.json');
 
-
 const Home = () => {
-    const differentiators = data.differentiators
-    const numbers = data.numbers
-    const arrayOfIcons = [faDatabase, faMagnifyingGlassChart, faSitemap, faEarthEurope, faPaperPlane]
-    const arrayOfImages = [linde, eon, swiim, quantum, accenture, mckinsey]
+    const differentiators = data.differentiators;
+    const numbers         = data.numbers;
+    const arrayOfIcons    = [faDatabase, faMagnifyingGlassChart, faSitemap, faEarthEurope, faPaperPlane];
+    const arrayOfImages   = [linde, eon, swiim, quantum, accenture, mckinsey];
 
     return (
     <>

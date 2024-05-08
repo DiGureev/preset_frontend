@@ -1,9 +1,10 @@
 import axios from 'axios';
 import { useRef, useContext, useState, useEffect } from 'react';
 import { UploadContext } from './UploadScreen.js';
-import { AppContext } from '../App.js';
-import '../App.css';
+import { AppContext } from '../../App.js';
 import '../Button.css';
+import "./UploadScreen.css"
+
 
 const Link = () => {
     const linkInput = useRef('');
