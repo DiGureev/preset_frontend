@@ -1,11 +1,14 @@
-import { useRef, useContext } from "react";
+import { useRef, useContext, useState } from "react";
 import axios from "axios";
 import { AppContext } from "../App";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash, faCircleArrowRight} from '@fortawesome/free-solid-svg-icons';
 
 
 const url = process.env.REACT_APP_USER_URL;
 
 const Reg = () => {
+    const [icon, setIcon] = useState(faEye)
     const username = useRef('')
     const email = useRef('')
     const password = useRef('')
@@ -50,32 +53,53 @@ const Reg = () => {
         });
 
     }
-const getCookie = async (body) => {
+    const getCookie = async (body) => {
 
-    const res = await fetch(`${url}gettoken/`, {
-        method: 'GET',
-        credentials: 'include' // Include cookies in cross-origin requests
-    })
-    .then(response => response.json())
-    .then(data => {
-        const csrfToken = data.csrfToken;
-        console.log('This is token =>', csrfToken)
-        register(body, csrfToken)
-    })
-    .catch(error => {
-        console.error('Error fetching CSRF token:', error);
-    });
+        const res = await fetch(`${url}gettoken/`, {
+            method: 'GET',
+            credentials: 'include' // Include cookies in cross-origin requests
+        })
+        .then(response => response.json())
+        .then(data => {
+            const csrfToken = data.csrfToken;
+            console.log('This is token =>', csrfToken)
+            register(body, csrfToken)
+        })
+        .catch(error => {
+            console.error('Error fetching CSRF token:', error);
+        });
 
-}
+    }
+
+    function togglePasswordVisibility() {
+        console.log("Click")
+        const passwordField = document.getElementById("password");
+        
+        if (passwordField.type === "password") {
+            passwordField.type = "text";
+            setIcon(faEyeSlash)
+        } else {
+            passwordField.type = "password";
+            setIcon(faEye)
+        }
+    }
 
     return(
-        <form onSubmit={handleSubmit}>
-            <input placeholder="username" ref={username}/>
-            <input placeholder="email" ref={email}/>
-            <input placeholder="password" ref={password}/>
-            <button>Submit</button>
-
+        <>
+        <h1>Create account</h1>
+        <form onSubmit={handleSubmit} className="registration">
+            <label >Email</label>
+            <input ref={username} name="username"/>
+            <label >Email</label>
+            <input name="email" ref={email}/>
+            <label >Password</label>
+            <input name="password" type="password" id='password' ref={password}/>
+            <span className="toggle-password" onClick={togglePasswordVisibility}>
+                <FontAwesomeIcon icon={icon}/>
+            </span>
+            <button>Create account <FontAwesomeIcon icon={faCircleArrowRight}/></button>
         </form>
+        </>
     )
 }
 

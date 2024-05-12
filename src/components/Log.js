@@ -10,7 +10,7 @@ const Log = () => {
     const {setLog} = useContext(AppContext)
     const [msg, setMsg] = useState("")
 
-    const handleSubmit = (e) => {
+    const handleLogin = (e) => {
         e.preventDefault()
 
         let emailValue = email.current.value
@@ -68,7 +68,7 @@ const getCookie = async (body) => {
 }
 
     return(
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleLogin}>
             <input placeholder="email" ref={email}/>
             <input placeholder="password" ref={password}/>
             <button>Submit</button>
