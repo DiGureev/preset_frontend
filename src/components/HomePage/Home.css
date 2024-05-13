@@ -221,3 +221,7 @@ input:focus {
     margin-left: 0;
 }
 
+.main-description button {
+    margin: auto;
+}
+

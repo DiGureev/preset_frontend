@@ -2,14 +2,10 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from './components/Navigation/Navbar.js';
 import { useState, createContext, useEffect } from 'react';
-import Reg from './components/Reg.js';
-import Log from './components/Log.js';
 import Registration from './components/Registration.js'
-import Logout from './components/Logout.js';
 import Analytics from './components/Analytics.js'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './components/HomePage/Home.js'
-import Auth from './components/CheckAuth.js'
 import Contacts from './components/Contacts.js';
 
 export const AppContext = createContext();
@@ -103,7 +99,7 @@ const auth = async (csrfToken) => {
 }
 const getCookie = async () => {
 
-  const res = await fetch(`${url}gettoken/`, {
+  await fetch(`${url}gettoken/`, {
       method: 'GET',
       credentials: 'include' // Include cookies in cross-origin requests
   })

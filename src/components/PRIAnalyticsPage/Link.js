@@ -4,6 +4,8 @@ import { UploadContext } from './UploadScreen.js';
 import { AppContext } from '../../App.js';
 import '../Button.css';
 import "./UploadScreen.css"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faCircleArrowRight} from '@fortawesome/free-solid-svg-icons';
 
 
 const Link = () => {
@@ -14,13 +16,14 @@ const Link = () => {
     const [isLoading, setIsLoading] = useState(false); 
 
     const { download, setDocName, setPath, setKeywordsFetched, setKiwiTable, setTable } = useContext(AppContext);
-    const { url, setMsg } = useContext(UploadContext);
+    const { url, setMsg, setDisplay } = useContext(UploadContext);
 
     useEffect(() => {
         handleInputChange({ target: { value: linkInput.current.value } });
     }, []);
 
     const fetchData = async () => {
+        setDisplay('none')
         setMsg('');
         setIsLoading(true); 
 
@@ -65,9 +68,9 @@ const Link = () => {
     return (
         <div className='upload-input'>
             <div className='upload-content'>
-                <input type="text" placeholder="Link" ref={linkInput} onChange={handleInputChange} style={{ minWidth: "322px", width: "90%", border: "1px solid #685E5E", padding: "8px", borderRadius: "5px" }} />
+                <input type="text" placeholder="https://example.com/document-scan" ref={linkInput} onChange={handleInputChange} />
             </div>
-            <button onClick={fetchData} disabled={!linkUploaded}>Get the keywords</button>
+            <button onClick={fetchData} disabled={!linkUploaded}>Get the keywords <FontAwesomeIcon icon={faCircleArrowRight}/></button>
             {/* Loading process div */}
             {isLoading && (
                 <div className="loading-container">

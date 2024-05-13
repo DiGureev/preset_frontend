@@ -1,0 +1,45 @@
+#registration-div {
+    min-width: 300px;
+    width: 30%;
+    padding: 2rem;
+    margin: auto;
+}
+
+#registration-div form {
+    display: flex;
+    flex-direction: column;
+
+}
+
+#registration-div input {
+    height: 3rem;
+    margin-bottom: 1rem;
+    border: 2px solid rgba(43, 88, 255, .5);
+}
+
+#registration-div button {
+    width: 100%;
+}
+
+h1 {
+    margin-bottom: 2rem;
+}
+
+.password-container {
+    position: relative;
+}
+
+#password {
+    width: 100%;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+    color: #2B58E1;
+    font-size: 20px;
+    right: 0;
+    transform:translateY(50%);
+    margin-right: 1rem;
+}

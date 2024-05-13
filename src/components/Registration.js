@@ -1,11 +1,10 @@
-import { useRef, useContext, useState, useEffect, useInsertionEffect } from "react";
+import { useRef, useContext, useState } from "react";
 import { AppContext } from "../App";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash, faCircleArrowRight} from '@fortawesome/free-solid-svg-icons';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
-
-
+import './Registration.css'
 
 
 const url = process.env.REACT_APP_USER_URL;
@@ -58,7 +57,7 @@ const Registration = () => {
     const register = async (body, csrfToken, link) => {
         // var csrftoken = getCookie('csrftoken');
 
-        let res = await fetch(link, {
+        await fetch(link, {
             method: 'POST',
             headers: {
                     'Content-Type': 'application/json',
@@ -99,7 +98,7 @@ const Registration = () => {
     }
     const getCookie = async (body) => {
 
-        const res = await fetch(`${url}gettoken/`, {
+        await fetch(`${url}gettoken/`, {
             method: 'GET',
             credentials: 'include' // Include cookies in cross-origin requests
         })
@@ -136,24 +135,24 @@ const Registration = () => {
     if (path === "login"){
 
         return(
-            <>
+            <div id="registration-div">
             <h1>Login</h1>
             <form onSubmit={handleLogin}>
                 <label >Email</label>
                 <input name="email" ref={email}/>
                 <label >Password</label>
-                <input name="password" type="password" id='password' ref={password}/>
-                <span className="toggle-password" onClick={togglePasswordVisibility}>
-                    <FontAwesomeIcon icon={icon}/>
-                </span>
+                <div class="password-container">
+                    <input name="password" type="password" id='password' ref={password}/>
+                    <FontAwesomeIcon icon={icon} className="toggle-password" onClick={togglePasswordVisibility}/>
+                </div>
                 <button>Continue <FontAwesomeIcon icon={faCircleArrowRight}/></button>
                 <p>{msg}</p>
             </form>
-            </>
+            </div>
         )
     } else {
         return(
-            <>
+            <div id="registration-div">
             <h1>Create account</h1>
             <form onSubmit={handleSubmit} className="registration">
                 <label >Username</label>
@@ -161,14 +160,14 @@ const Registration = () => {
                 <label >Email</label>
                 <input name="email" ref={email}/>
                 <label >Password</label>
-                <input name="password" type="password" id='password' ref={password}/>
-                <span className="toggle-password" onClick={togglePasswordVisibility}>
-                    <FontAwesomeIcon icon={icon}/>
-                </span>
+                <div class="password-container">
+                    <input name="password" type="password" id='password' ref={password}/>
+                    <FontAwesomeIcon icon={icon} className="toggle-password" onClick={togglePasswordVisibility}/>
+                </div>
                 <button>Create account <FontAwesomeIcon icon={faCircleArrowRight}/></button>
                 <p>{msg}</p>
             </form>
-            </>
+            </div>
         )
     }
 

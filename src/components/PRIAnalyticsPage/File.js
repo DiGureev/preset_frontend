@@ -5,6 +5,8 @@ import { AppContext } from '../../App.js';
 import { FileUploader } from "react-drag-drop-files";
 import '../Button.css';
 import "./UploadScreen.css"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faCircleArrowRight} from '@fortawesome/free-solid-svg-icons';
 
 
 const fileTypes = ["PDF"];
@@ -17,7 +19,7 @@ const File = () => {
     const [isLoading, setIsLoading] = useState(false); 
 
     const { download, setDocName, setPath, setKeywordsFetched, setKiwiTable, setTable } = useContext(AppContext);
-    const { url, setMsg } = useContext(UploadContext);
+    const { url, setMsg, setDisplay } = useContext(UploadContext);
 
     useEffect(() => {
         if (file) {
@@ -39,6 +41,8 @@ const File = () => {
             setMsg('Please, upload the file');
             return;
         }
+
+        setDisplay('none')
 
         setIsLoading(true); 
 
@@ -79,10 +83,18 @@ const File = () => {
     return (
         <div className='upload-input'>
             <div className='upload-content'>
-                <FileUploader width="50%" handleChange={handleFileChange} name="file" types={fileTypes} />
+                <FileUploader 
+                    width="50%" 
+                    handleChange={handleFileChange} 
+                    name="file" 
+                    types={fileTypes} >
+                    <div className="file-uploader-text">
+                        <p><u>Select documents</u> or simply drop it here</p>
+                    </div>
+                </FileUploader>
                 <div style={{ marginTop: "10px", fontSize: "0.8rem" }}>{file && `${file.name} - ${file.type}`}</div>
             </div>
-            <button onClick={handleUploadClick} disabled={isButtonDisabled}>Get the keywords</button>
+            <button onClick={handleUploadClick} disabled={isButtonDisabled}>Get the keywords <FontAwesomeIcon icon={faCircleArrowRight}/></button>
             {/* Loading process div */}
             {isLoading && (
                 <div className="loading-container">
