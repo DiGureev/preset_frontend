@@ -13,6 +13,10 @@ table th, table td {
 
 }
 
+table tr:nth-child(odd) {
+    background-color: #E0E7FB;
+}
+
 table thead th:first-child {
     border-top-left-radius: 6px;
 }
@@ -79,6 +83,7 @@ table thead th:last-child {
     width: 70%;
     top: 40%;
     font-size: 0.8rem;
+    color: black;
     
     display: none;
     background-color: white; /* Set background color to opaque */

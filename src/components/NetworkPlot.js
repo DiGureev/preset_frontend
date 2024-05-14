@@ -50,7 +50,7 @@ const NetworkPlot = () => {
                 <div style={{display: "flex", justifyContent: "center"}}>
                     <ForceGraph2D
                         graphData={matrix}
-                        backgroundColor={'white'}
+                        backgroundColor={'#E0E7FB'}
                         linkColor = {"white"}
                         width={displayWidth*0.6}
                         height={400}

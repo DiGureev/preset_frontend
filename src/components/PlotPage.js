@@ -4,6 +4,10 @@ import { AppContext } from '../App.js';
 import Plot from 'react-plotly.js';
 import NavButtons from "./NavButtons.js";
 import '../App.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleQuestion} from '@fortawesome/free-solid-svg-icons';
+import './Results.css'
+import { width } from '@fortawesome/free-solid-svg-icons/fa0';
 
 const url = process.env.REACT_APP_API_URL;
 
@@ -49,35 +53,52 @@ const PlotPage = () => {
     return (
         <div className="result-div">
             <NavButtons/>
-            <h2>Grasping the Context</h2>
-            <div id='content'>
-            <div style={{padding: "1rem"}}>
-                <p>To get a quick glimpse of the context before diving deep into the reading, use a keyword to gather the pieces of information together.
-                Examine the context with the keyword co-occurrence plot. Type in your own word or choose one from the KEWI list.</p>
-                
+            <div style={{padding: "1rem"}}> 
                 {/* Select word from the list */}
-                <p id = "choose_words">Choose the word to build the graph:</p>
-                <select
-                    id="search_word"
-                    onChange={handleSelectChange}
-                    value={selectedWord}
-                >
-                {kiwiTable.map((item, index) => (
-                    <option value={item.Word} key={index}>{item.Word}</option>
-                ))}
-                </select>
-
-                <div  id="additional-words">
-                <p>or enter your word: <br/></p>
-                <input id="additional-words-input" type="text" ref={additionalWords}/>
-                <button id="additional-words-btn" onClick={addWords}>Build the graph</button>
+                <div id="additional-words-input">
+                    <select
+                        id="search_word"
+                        onChange={handleSelectChange}
+                        value={selectedWord}
+                    >
+                    {kiwiTable.map((item, index) => (
+                        <option value={item.Word} key={index}>{item.Word}</option>
+                    ))}
+                    </select>
+                    <FontAwesomeIcon icon={faCircleQuestion} id="additional-words-icon" style={{marginLeft:"1rem"}}/>
+                    <div class="hidden-div" style={{maxWidth:"300px", position: "absolut", left: "50%", zIndex: "1"}}>
+                        <h3>Enhance Research with Keyword Indexing:</h3>
+                        <ul>
+                        <li>To get a quick glimpse of the context before diving deep into the reading, use a keyword to gather the pieces of information together. Examine the context with the keyword co-occurrence plot. Type in your own word or choose one from the KEWI list.</li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
 
+                {/* <div  id="additional-words">
+                    <div id="additional-words-input">
+                        <input  type="text" placeholder="energy" ref={additionalWords}/>
+                        <FontAwesomeIcon icon={faCircleQuestion} id="additional-words-icon"/>
+                        <div class="hidden-div">
+                            <h3>Enhance Research with Keyword Indexing:</h3>
+                            <ul>
+                            <li>Keyword indexing (KeWI) streamlines your research by accelerating search and facilitating cross-referencing.</li>
+                            <li>Identify key terms and incorporate them into your queries for optimal results.</li>
+                            <li>You can customize KeWI by adding your own relevant terms. (Family words are grouped, so "invest" includes investment, investor, investing, etc.)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <button id="additional-words-btn" onClick={addWords}>Build the graph</button>
+                </div> */}
+            </div>
+        <div id='content'>
+            
             {/* Display plot */}
             {selectedWord && (
                 <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
-                    {plot.length == 0? <p>This word is not frequent enough or not present.<br/> Please try another word.</p> : <Plot data={plot} layout={{title: `Context for "${selectedWord}"` }} useResizeHandler={true} style={{width: '100%', height: '100%'}} />}
+                    {plot.length == 0? <p>This word is not frequent enough or not present.<br/> Please try another word.</p> : <Plot data={plot} layout={{title: `Context for "${selectedWord}"`, yaxis: {
+                        showgrid: false
+                      }, paper_bgcolor:"#E0E7FB", plot_bgcolor:"#E0E7FB" }} useResizeHandler={true} style={{width: '100%', height: '100%'}} 
+                      />}
                 </div>
             )}
         </div>
