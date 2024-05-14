@@ -61,28 +61,27 @@
 }
 
 .toggle-btn {
-  background-color: #23C684 !important;
-  border: 1px solid #0C193F  !important;
+  background-color: white !important;
+  border: 1px solid #2B58E1  !important;
   padding: 10px;
-  text-transform: uppercase;
-  color: #0C193F !important;
-  font-weight: 700 !important;
+  color: #2B58E1 !important;
+  font-weight: 500 !important;
+  margin-right: 1rem;
 }
 
 .active {
   color: white !important;
+  background-color: #2B58E1 !important;
 }
 
-#toggle-btn-div {
+.btn-group {
   width: 80%;
   margin: auto;
   text-align: center;
   display: flex;
-  padding-top: 2rem;
+  padding-bottom: 2rem;
   justify-content: center;
 }
-
-
 
 #nav-buttons {
   display: flex;
@@ -205,14 +204,14 @@ h1 {
   flex-wrap: wrap;
 }
 
-#additional-words {
+/* #additional-words {
   display: flex;
   width: 60%;
   margin: auto;
   flex-wrap: wrap;
   flex-direction: column;
   padding: 1rem;
-}
+} */
 
 #download_csv a {
   color: white;
@@ -230,15 +229,15 @@ h1 {
 
 #content {
   display: flex;
-  width: 100%;
+  width: 80%;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-around;
   padding-bottom: 1rem;
   padding-top: 1rem;
   margin: auto;
 }
 
-#table-content {
+/* #table-content {
   padding: 1rem;
   height: 300px;
   overflow: scroll;
@@ -246,13 +245,13 @@ h1 {
   margin: auto;
   margin-bottom: 2rem;
   overflow-y: auto;
-}
+} */
 
-table thead tr:first-child th {
+/* table thead tr:first-child th {
   position: sticky;
   top: 0px;
   background-color: #afc8f0;
-}
+} */
 
 .copyright {
   font-size: 1.2rem;

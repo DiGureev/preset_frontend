@@ -20,12 +20,6 @@ const UploadScreen = () => {
 
   const navigate = useNavigate();
 
-  useEffect(()=>{
-    if(!logged) {
-      navigate("/login")
-    }
-  }, [])
-
   const handleUploadWindow = () => {
     if (display === 'none') {
       setDisplay('');

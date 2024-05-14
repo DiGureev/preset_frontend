@@ -48,6 +48,7 @@ const PlotPage = () => {
 
     return (
         <div className="result-div">
+            <NavButtons/>
             <h2>Grasping the Context</h2>
             <div id='content'>
             <div style={{padding: "1rem"}}>
@@ -80,8 +81,7 @@ const PlotPage = () => {
                 </div>
             )}
         </div>
-        {/* The buttons at the bottom of the page to switch between the components */}
-        <NavButtons/>
+        
     </div>
     )
 }

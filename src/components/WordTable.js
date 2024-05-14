@@ -1,9 +1,12 @@
 import axios from "axios";
 import { useContext, useRef} from "react";
 import { AppContext } from "../App";
-import Table from 'react-bootstrap/Table';
+// import Table from 'react-bootstrap/Table';
 import NavButtons from "./NavButtons.js";
 import '../App.css';
+import './Results.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleQuestion} from '@fortawesome/free-solid-svg-icons';
 
 const url = process.env.REACT_APP_API_URL;
 
@@ -34,46 +37,56 @@ const WordTable = ( ) => {
 
     return (
       <div className="result-div">
+         <NavButtons/>
         <h2>Dive-In Reading</h2>
         <div id='content'>
-        <div id='table-content'>
-          {/* Main table */}
-          <Table striped bordered hover size="sm" responsive>
-            <thead>
-              <tr>
-                <th>Word</th>
-                <th>Pages</th>
-                <th>Relative Frequency</th>
-              </tr>
-            </thead>
-            <tbody>
-              {/* Rows */}
-              {kiwiTable.map((item, index) => (
-                <tr key={index}>
-                  <td>{item.Word}</td>
-                  <td>{item.Pages.Pages.join(", ")}</td>
-                  <td>{item.Pages.RelativeFrequency}</td>
+          <div id='table-content'>
+            {/* Main table */}
+            <table >
+              <thead>
+                <tr>
+                  <th>Word</th>
+                  <th>Pages</th>
+                  <th>Relative Frequency</th>
                 </tr>
-              ))}
-            </tbody>
-          </Table>
-          </div>
+              </thead>
+              <tbody>
+                {/* Rows */}
+                {kiwiTable.map((item, index) => (
+                  <tr key={index}>
+                    <td>{item.Word}</td>
+                    <td>{item.Pages.Pages.join(", ")}</td>
+                    <td>{item.Pages.RelativeFrequency}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            </div>
         <div  id="additional-words">
-          <p>To navigate your reading, accelerate the search, and help trans-references, use keyword index (KeWI) generator. 
-          Learn the top words and use the right vocabulary in your questions. If needed, you can add your own words to the KeWI.
-          <i>(Note that family words are combined, i.e. "invest" is added for [investment, investor, investing,..]).</i></p>
-          
-          <p>If you would like to add additional words, please enter them here. <br/> Example: word1, word2</p>
-          <input id="additional-words-input" type="text" ref={additionalWords}/>
+          <p>Enter additional keywords here. Example: word1, word2</p>
+          <div id="additional-words-input">
+          <input  type="text" placeholder="energy" ref={additionalWords}/>
+          <FontAwesomeIcon icon={faCircleQuestion} id="additional-words-icon"/>
+          <div class="hidden-div">
+            <h3>Enhance Research with Keyword Indexing:</h3>
+            <ul>
+              <li>Keyword indexing (KeWI) streamlines your research by accelerating search and facilitating cross-referencing.</li>
+              <li>Identify key terms and incorporate them into your queries for optimal results.</li>
+              <li>You can customize KeWI by adding your own relevant terms. (Family words are grouped, so "invest" includes investment, investor, investing, etc.)</li>
+            </ul>
+          </div>
+          </div>
           <button id="additional-words-btn" onClick={addWords}>Add words to the table</button>
         </div>
+        
+
         </div>
         
         {/* Download CSV button */}
         <button id="download_csv"><a href={csvUrl} download={docName}>Download table (CSV)</a></button>
         
         {/* The buttons at the bottom of the page to switch between the components */}
-        <NavButtons/>
+
       </div>
     )
 }

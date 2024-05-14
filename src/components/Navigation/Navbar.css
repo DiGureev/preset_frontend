@@ -29,6 +29,7 @@
 
 .menu-item:hover, .username a:hover {
     border-bottom: solid 3px #2B58E1;
+    cursor: pointer;
 }
 
 .username {

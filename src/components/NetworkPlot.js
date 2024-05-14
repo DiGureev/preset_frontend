@@ -45,6 +45,7 @@ const NetworkPlot = () => {
 
     return (
         <div className="result-div">
+              <NavButtons/>
             <h2>From Text-base to Knowledge-base</h2>
                 <div style={{display: "flex", justifyContent: "center"}}>
                     <ForceGraph2D
@@ -80,7 +81,7 @@ const NetworkPlot = () => {
                     />
                 </div>
             {/* The buttons at the bottom of the page to switch between the components */}
-            <NavButtons/>
+          
         </div>
     )
 }
