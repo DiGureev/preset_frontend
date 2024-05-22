@@ -35,7 +35,7 @@ const Registration = () => {
             password: passwordValue
         }
 
-        register(body)
+        getCookie(body)
     }
 
     const handleLogin = (e) => {
@@ -49,12 +49,11 @@ const Registration = () => {
             password: passwordValue
         }
 
-        register(body)
+        getCookie(body)
 
     }
 
-    const register = async (body) => {
-        const csrfToken = await getCookie();
+    const register = async (body, csrfToken) => {
 
         console.log('This is token from register =>', csrfToken)
 
@@ -108,7 +107,7 @@ const Registration = () => {
         });
 
     }
-    const getCookie = async () => {
+    const getCookie = async (body) => {
 
         return await fetch(`${url}gettoken/`, {
             method: 'GET',
@@ -119,7 +118,8 @@ const Registration = () => {
             const csrfToken = data.csrfToken;
             console.log('This is token =>', csrfToken)
 
-            return csrfToken
+            register(body, csrfToken)
+
         })
         .catch(error => {
             console.error('Error fetching CSRF token:', error);
