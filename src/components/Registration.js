@@ -35,8 +35,7 @@ const Registration = () => {
             password: passwordValue
         }
 
-        getCookie(body)
-
+        register(body)
     }
 
     const handleLogin = (e) => {
