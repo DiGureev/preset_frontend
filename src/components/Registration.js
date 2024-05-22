@@ -110,7 +110,7 @@ const Registration = () => {
     }
     const getCookie = async () => {
 
-        await fetch(`${url}gettoken/`, {
+        const csrfToken = await fetch(`${url}gettoken/`, {
             method: 'GET',
             credentials: 'include' // Include cookies in cross-origin requests
         })
@@ -124,6 +124,8 @@ const Registration = () => {
         .catch(error => {
             console.error('Error fetching CSRF token:', error);
         });
+
+        return csrfToken
 
     }
 
