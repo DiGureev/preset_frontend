@@ -117,8 +117,8 @@ const Registration = () => {
         })
         .then(response => response.json())
         .then(data => {
-            console.log('This is token =>', csrfToken)
             const csrfToken = data.csrfToken;
+            console.log('This is token =>', csrfToken)
 
             return csrfToken
         })
