@@ -64,8 +64,6 @@ const Registration = () => {
                 link = `${url}signup/`
             }
 
-        try{
-
         const response = await fetch(link, {
             method: 'POST',
             headers: {
@@ -100,8 +98,6 @@ const Registration = () => {
                 navigate('/login');
             },1000)
         }
-        } catch{(error) => console.error('Error during signup request:', error);
-        };
 
     }
     const getCookie = async (body) => {
