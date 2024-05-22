@@ -85,22 +85,22 @@ const File = () => {
         }
     };
 
-    const saveTableInDB = async (name, table, path, csrfToken) => {
-        let body = {table: table , name: name, path: path}
+    // const saveTableInDB = async (name, table, path, csrfToken) => {
+    //     let body = {table: table , name: name, path: path}
 
-        await fetch(`${kiwi_url}upload/`, {
-            method: 'POST',
-            headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRFToken': csrfToken, // Include the CSRF token in the headers
+    //     await fetch(`${kiwi_url}upload/`, {
+    //         method: 'POST',
+    //         headers: {
+    //                 'Content-Type': 'application/json',
+    //                 'X-CSRFToken': csrfToken, // Include the CSRF token in the headers
                   
-                },
-                credentials: 'include', // Include cookies in cross-origin requests
-                body: JSON.stringify(body)
-        })
-        .then(response => response.json())
-        .then(json => console.log(json))
-    }
+    //             },
+    //             credentials: 'include', // Include cookies in cross-origin requests
+    //             body: JSON.stringify(body)
+    //     })
+    //     .then(response => response.json())
+    //     .then(json => console.log(json))
+    // }
 
     const getCookie = async (name,table, path) => {
         await fetch(`${user_url}gettoken/`, {
