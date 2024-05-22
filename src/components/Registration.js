@@ -64,7 +64,9 @@ const Registration = () => {
                 link = `${url}signup/`
             }
 
-        await fetch(link, {
+        try{
+
+        const response = await fetch(link, {
             method: 'POST',
             headers: {
                     'Content-Type': 'application/json',
@@ -74,37 +76,32 @@ const Registration = () => {
                 credentials: 'include', // Include cookies in cross-origin requests
                 body: JSON.stringify(body)
         })
-        .then(response => {
-            
-            if (path === "login") {
-                if (response.status === 200){
-                    return response.json()
-                } else {
-                    setMsg("Wrong password or user doesn't exist")
-                }
-            } else {
-                setMsg("Success")
-                
-                username.current.value = ''
-                email.current.value = ''
-                password.current.value = ''
 
-                setTimeout(()=>{
-                    setMsg('')
-                    navigate('/login');
-                },1000)
+        if (path === "login") {
+            if (response.status === 200){
+                const data = await response.json()
+                console.log(data)
+                console.log(data.username)
+                setLog(true)
+                setUsername(data.username)
+                navigate('/');
+            } else {
+                setMsg("Wrong password or user doesn't exist")
             }
-        })
-        .then(json => {
-            console.log(json)
-            console.log(json.username)
-            setLog(true)
-            setUsername(json.username)
-            navigate('/');
-        })
-        .catch(error => {
-            console.error('Error during signup request:', error);
-        });
+        } else {
+            setMsg("Success")
+            
+            username.current.value = ''
+            email.current.value = ''
+            password.current.value = ''
+
+            setTimeout(()=>{
+                setMsg('')
+                navigate('/login');
+            },1000)
+        }
+        } catch{(error) => console.error('Error during signup request:', error);
+        };
 
     }
     const getCookie = async (body) => {
