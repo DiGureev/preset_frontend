@@ -7,7 +7,7 @@ import "./UploadScreen.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faCircleArrowRight} from '@fortawesome/free-solid-svg-icons';
 
-const kiwi_url = process.env.REACT_APP_KIWI_URL;
+// const kiwi_url = process.env.REACT_APP_KIWI_URL;
 const user_url = process.env.REACT_APP_USER_URL;
 
 const Link = () => {
@@ -92,7 +92,7 @@ const Link = () => {
             const csrfToken = data.csrfToken;
             console.log('This is token =>', csrfToken)
             
-            saveTableInDB(name, table, path, csrfToken)
+            // saveTableInDB(name, table, path, csrfToken)
         })
         .catch(error => {
             console.error('Error fetching CSRF token:', error);

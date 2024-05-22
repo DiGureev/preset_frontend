@@ -50,12 +50,21 @@ const Registration = () => {
             password: passwordValue
         }
 
-        getCookie(body)
+        register(body)
 
     }
 
-    const register = async (body, csrfToken, link) => {
-        // var csrftoken = getCookie('csrftoken');
+    const register = async (body) => {
+        const csrfToken = await getCookie('csrftoken');
+
+        console.log('This is token from register =>', csrfToken)
+
+        let link = ''
+            if (path === "login"){
+                link = `${url}log-in/`
+            }else {
+                link = `${url}signup/`
+            }
 
         await fetch(link, {
             method: 'POST',
@@ -67,9 +76,8 @@ const Registration = () => {
                 credentials: 'include', // Include cookies in cross-origin requests
                 body: JSON.stringify(body)
         })
-
-        
         .then(response => {
+            
             if (path === "login") {
                 if (response.status === 200){
                     return response.json()
@@ -101,7 +109,7 @@ const Registration = () => {
         });
 
     }
-    const getCookie = async (body) => {
+    const getCookie = async () => {
 
         await fetch(`${url}gettoken/`, {
             method: 'GET',
@@ -109,15 +117,10 @@ const Registration = () => {
         })
         .then(response => response.json())
         .then(data => {
-            const csrfToken = data.csrfToken;
             console.log('This is token =>', csrfToken)
-            let link = ''
-            if (path === "login"){
-                link = `${url}log-in/`
-            }else {
-                link = `${url}signup/`
-            }
-            register(body, csrfToken, link)
+            const csrfToken = data.csrfToken;
+
+            return csrfToken
         })
         .catch(error => {
             console.error('Error fetching CSRF token:', error);

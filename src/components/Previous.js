@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faFile} from '@fortawesome/free-solid-svg-icons';
 import './Previous.css'
 
-const kiwi_url = process.env.REACT_APP_KIWI_URL;
+// const kiwi_url = process.env.REACT_APP_KIWI_URL;
 const user_url = process.env.REACT_APP_USER_URL
 
 const Previous = () => {

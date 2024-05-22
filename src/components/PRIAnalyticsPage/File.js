@@ -10,7 +10,7 @@ import {faCircleArrowRight} from '@fortawesome/free-solid-svg-icons';
 
 
 const fileTypes = ["PDF"];
-const kiwi_url = process.env.REACT_APP_KIWI_URL;
+// const kiwi_url = process.env.REACT_APP_KIWI_URL;
 const user_url = process.env.REACT_APP_USER_URL
 
 
@@ -112,7 +112,7 @@ const File = () => {
             const csrfToken = data.csrfToken;
             console.log('This is token =>', csrfToken)
             
-            saveTableInDB(name, table, path, csrfToken)
+            // saveTableInDB(name, table, path, csrfToken)
         })
         .catch(error => {
             console.error('Error fetching CSRF token:', error);
