@@ -1,5 +1,5 @@
 import UploadScreen from './PRIAnalyticsPage/UploadScreen.js';
-import Previous from './Previous.js';
+// import Previous from './Previous.js';
 import Results from './Results.js';
 import { AppContext } from '../App.js';
 import { useContext } from 'react';
@@ -15,7 +15,7 @@ const Analytics = ()=>{
             {!keywordsFetched && <UploadScreen />}
             <Results/>
           </div>
-          <Previous />
+          {/* <Previous /> */}
         </div>
         </>)
 }

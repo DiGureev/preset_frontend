@@ -42,7 +42,7 @@ const PlotPage = () => {
     };
 
     useEffect(() => {
-        getPlot();
+        getPlot()
     }, [file_path, kiwiTable, selectedWord]);
 
 

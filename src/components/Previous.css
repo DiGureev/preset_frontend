@@ -1,0 +1,36 @@
+#previous-div {
+ margin: 40px;
+ padding: 40px;
+ border: 2px solid rgba(43, 88, 255, .5);
+ border-radius: 6px;
+ width: 40%;
+}
+
+#prev-subtitle{
+    display: flex;
+    justify-content: space-between;
+}
+
+.docsname-div {
+    border-top: 2px solid rgb(199, 197, 197);
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.docsname-div:hover {
+    background-color: rgba(43, 89, 255, 0.2);
+}
+
+.docsicon-div {
+    display: flex;
+}
+
+.docs-icon {
+    color: #2B58E1;
+    font-size: 1.5rem;
+}
+
+.docs-name {
+    margin-left: 2rem;
+}

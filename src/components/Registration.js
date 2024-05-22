@@ -78,6 +78,11 @@ const Registration = () => {
                 }
             } else {
                 setMsg("Success")
+                
+                username.current.value = ''
+                email.current.value = ''
+                password.current.value = ''
+
                 setTimeout(()=>{
                     setMsg('')
                     navigate('/login');

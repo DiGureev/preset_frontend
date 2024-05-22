@@ -99,22 +99,6 @@
   height: 12vh;
 }
 
-#previous-div {
-  background-color: rgba(255, 255, 255, 0.9);
-  padding: 1rem;
-  margin: 2% 0;
-}
-
-#previous-btn {
-  padding: 1rem;
-  background-color: #FFCF5C;
-  border-radius: 5px;
-  border: 0;
-  text-align: left;
-  color: #685E5E;
-  min-width: 120px;
-}
-
 /* .main {
   background-color: rgb(12, 25, 63);
   min-height: 100vh;

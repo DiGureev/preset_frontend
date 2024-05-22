@@ -120,14 +120,12 @@ const getCookie = async () => {
         <Router>
           <div>
             <Navbar />
-            {/* <Logout/>
-            <Auth/> */}
+
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/analytics" element={<Analytics/>} />
               <Route path="/:path" element={<Registration/>} />
               <Route path="/contacts" element={<Contacts/>} />
-             
             </Routes>
           </div>
         </Router>
