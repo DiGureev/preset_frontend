@@ -54,7 +54,7 @@ const Registration = () => {
     }
 
     const register = async (body) => {
-        const csrfToken = await getCookie('csrftoken');
+        const csrfToken = await getCookie();
 
         console.log('This is token from register =>', csrfToken)
 
