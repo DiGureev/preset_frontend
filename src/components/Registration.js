@@ -120,9 +120,9 @@ const Registration = () => {
         .then(data => {
             var csrftoken = getCookie('csrftoken');
             // const csrfToken = data.csrfToken;
-            console.log('This is token =>', csrfToken)
+            console.log('This is token =>', csrftoken)
 
-            register(body, csrfToken)
+            register(body, csrftoken)
 
         })
         .catch(error => {
