@@ -85,18 +85,28 @@ const Registration = () => {
                 navigate('/');
             } else {
                 setMsg("Wrong password or user doesn't exist")
+                setTimeout(()=>{
+                    setMsg('')
+                },1000)
             }
         } else {
-            setMsg("Success")
-            
-            username.current.value = ''
-            email.current.value = ''
-            password.current.value = ''
+            const data = await response.json()
+            const msg = data.msg
+            setMsg(msg)
 
-            setTimeout(()=>{
-                setMsg('')
-                navigate('/login');
-            },1000)
+            if (msg === 'Success'){
+                username.current.value = ''
+                email.current.value = ''
+                password.current.value = ''
+
+
+                setTimeout(()=>{
+                    setMsg('')
+                    navigate('/login');
+                },1000)
+            }
+            
+            
         }
 
     }
