@@ -2,9 +2,11 @@ import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../App";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faFile} from '@fortawesome/free-solid-svg-icons';
+import api from "../api";
 import './Previous.css'
+import { tab } from "@testing-library/user-event/dist/tab";
 
-const kiwi_url = process.env.REACT_APP_KIWI_URL;
+// const kiwi_url = process.env.REACT_APP_KIWI_URL;
 const user_url = process.env.REACT_APP_USER_URL
 
 const Previous = () => {
@@ -16,73 +18,66 @@ const Previous = () => {
     },[kiwitable])
 
     const getTable = async (tableName) => {
-        let csrfToken = await getCookie()
 
-        console.log('This is token =>', csrfToken)
+        try {
+            const res = await api.get(`/kiwi/table/${encodeURIComponent(tableName)}/`);
+            const data = res.data
 
-        let body = {name: tableName}
-        let res = await fetch(`${kiwi_url}table/`, {
-            method: 'POST',
-            headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRFToken': csrfToken, // Include the CSRF token in the headers
-                  
-                },
-                credentials: 'include', // Include cookies in cross-origin requests
-                body: JSON.stringify(body)
-        })
+            console.log(data)
 
-        let data = await res.json()
-        setKiwiTable(JSON.parse(data.kiwitable))
-        download(JSON.parse(data.kiwitable))
-        setPath(data.path)
-        setKeywordsFetched(true);
-        setTable(true);
-        setDocName(tableName)
-      
-        console.log(data)
+            const table = JSON.parse(data.table)
+
+            setKiwiTable(table.kiwitable)
+            download(table.kiwitable)
+            setPath(data.path)
+            setKeywordsFetched(true);
+            setTable(true);
+            setDocName(data.name)
+
+    
+
+        } catch (err) {
+            console.log(err)
+        }
+
     }
 
     const checkPrevious = async () => {
-        let csrfToken = await getCookie()
 
-        let res = await fetch(`${kiwi_url}all/`, {
-            method: 'GET',
-            headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRFToken': csrfToken, // Include the CSRF token in the headers
-                  
-                },
-                credentials: 'include', // Include cookies in cross-origin requests
-        })
-        let data = await res.json()
-        setList(data)
-      
-        console.log(data)
+        try{
+            let res = await api.get(`/kiwi/all/`)
+            let data = await res.data
+            console.log(data)
+            setList(data)
+        } catch (err){
+            console.log(err)
+        }
+
+        
+    
     }
 
-    const getCookie = async () => {
-        let token = await fetch(`${user_url}gettoken/`, {
-            method: 'GET',
-            credentials: 'include' // Include cookies in cross-origin requests
-        })
-        .then(response => response.json())
-        .then(data => {
-            const csrfToken = data.csrfToken;
-            // console.log('This is token =>', csrfToken)
+    // const getCookie = async () => {
+    //     let token = await fetch(`${user_url}gettoken/`, {
+    //         method: 'GET',
+    //         credentials: 'include' // Include cookies in cross-origin requests
+    //     })
+    //     .then(response => response.json())
+    //     .then(data => {
+    //         const csrfToken = data.csrfToken;
+    //         // console.log('This is token =>', csrfToken)
             
-            return csrfToken
-        })
-        .catch(error => {
-            console.error('Error fetching CSRF token:', error);
-        });
+    //         return csrfToken
+    //     })
+    //     .catch(error => {
+    //         console.error('Error fetching CSRF token:', error);
+    //     });
 
-        return token
+    //     return token
 
-    }
+    // }
 
-    if (logged) { return (
-        <div id="previous-div">
+    return    <div id="previous-div">
             <h3>Recent</h3>
             <div id="prev-subtitle">
                 <p>Jump back to your last queries</p>
@@ -127,11 +122,7 @@ const Previous = () => {
                 }
             </div>
         </div>
-    )} else {
-        return <div id="previous-div">
-                    <h3>To see your previous documents, please log in</h3>
-                </div>
-    }
+ 
 }
 
 export default Previous

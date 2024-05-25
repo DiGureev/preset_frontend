@@ -7,11 +7,10 @@ import '../Button.css';
 import "./UploadScreen.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faCircleArrowRight} from '@fortawesome/free-solid-svg-icons';
+import api from '../../api.js';
 
 
 const fileTypes = ["PDF"];
-const kiwi_url = process.env.REACT_APP_KIWI_URL;
-const user_url = process.env.REACT_APP_USER_URL
 
 
 const File = () => {
@@ -77,7 +76,8 @@ const File = () => {
 
             setFile('')
 
-            getCookie(name, keywords, path)
+            saveTableInDB(name, keywords, path)
+
         } catch (error) {
             console.error('There was an error:', error);
         } finally {
@@ -85,39 +85,23 @@ const File = () => {
         }
     };
 
-    const saveTableInDB = async (name, table, path, csrfToken) => {
-        let body = {table: table , name: name, path: path}
+    const saveTableInDB = async (name, table, path) => {
+        name = name.replace('-Kiwi.csv', '')
 
-        await fetch(`${kiwi_url}upload/`, {
-            method: 'POST',
-            headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRFToken': csrfToken, // Include the CSRF token in the headers
-                  
-                },
-                credentials: 'include', // Include cookies in cross-origin requests
-                body: JSON.stringify(body)
-        })
-        .then(response => response.json())
-        .then(json => console.log(json))
-    }
+        let body = {
+            name: name, 
+            table: JSON.stringify({kiwitable: table}), 
+            path: path}
 
-    const getCookie = async (name,table, path) => {
-        await fetch(`${user_url}gettoken/`, {
-            method: 'GET',
-            credentials: 'include' // Include cookies in cross-origin requests
-        })
-        .then(response => response.json())
-        .then(data => {
-            const csrfToken = data.csrfToken;
-            console.log('This is token =>', csrfToken)
-            
-            saveTableInDB(name, table, path, csrfToken)
-        })
-        .catch(error => {
-            console.error('Error fetching CSRF token:', error);
-        });
-
+        console.log('body => ', body)
+        try{
+            const res = await api.post(`/kiwi/all/`, body)
+            console.log(res.data)
+        } catch (err) {
+            console.log(err)
+        }
+        
+        
     }
 
     return (

@@ -5,6 +5,8 @@ import { faEye, faEyeSlash, faCircleArrowRight} from '@fortawesome/free-solid-sv
 import { useParams } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import './Registration.css'
+import api from "../api.js";
+import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constants";
 
 
 const url = process.env.REACT_APP_USER_URL;
@@ -16,8 +18,7 @@ const Registration = () => {
     const username = useRef('')
     const email = useRef('')
     const password = useRef('')
-    const {setUsername} = useContext(AppContext)
-    const {setLog} = useContext(AppContext)
+    const {setUsername, setLog} = useContext(AppContext)
     const [msg, setMsg] = useState("")
 
     const handleSubmit = (e) => {
@@ -35,7 +36,7 @@ const Registration = () => {
             password: passwordValue
         }
 
-        getCookie(body)
+        register(body)
     }
 
     const handleLogin = (e) => {
@@ -45,91 +46,44 @@ const Registration = () => {
         let passwordValue = password.current.value
 
         let body = {
-            email: emailValue,
+            username: emailValue,
             password: passwordValue
         }
 
-        getCookie(body)
+        register(body)
 
     }
 
-    const register = async (body, csrfToken) => {
+    const register = async (body) => {
 
-        console.log('This is token from register =>', csrfToken)
-
-        let link = ''
+        let url_path = ''
             if (path === "login"){
-                link = `${url}log-in/`
+                url_path = `/user/gettoken/`
             }else {
-                link = `${url}signup/`
+                url_path = `/user/signup/`
             }
 
-        const response = await fetch(link, {
-            method: 'POST',
-            headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRFToken': csrfToken, // Include the CSRF token in the headers
-                  
-                },
-                credentials: 'include', // Include cookies in cross-origin requests
-                body: JSON.stringify(body)
-        })
+        try {
+            const res = await api.post(url_path, body)
 
-        if (path === "login") {
-            if (response.status === 200){
-                const data = await response.json()
-                console.log(data)
-                console.log(data.username)
+            if (res.status === 200){
+                setUsername(body.username)
                 setLog(true)
-                setUsername(data.username)
-                navigate('/');
+            }
+            if (path === "login") {
+                localStorage.setItem(ACCESS_TOKEN, res.data.access);
+                localStorage.setItem(REFRESH_TOKEN, res.data.refresh);
+                console.log('This is token from register =>', res.data.access)
+                navigate("/")
             } else {
-                setMsg("Wrong password or user doesn't exist")
-                setTimeout(()=>{
-                    setMsg('')
-                },1000)
+                navigate("/login")
             }
-        } else {
-            const data = await response.json()
-            const msg = data.msg
-            setMsg(msg)
 
-            if (msg === 'Success'){
-                username.current.value = ''
-                email.current.value = ''
-                password.current.value = ''
-
-
-                setTimeout(()=>{
-                    setMsg('')
-                    navigate('/login');
-                },1000)
-            }
-            
-            
-        }
-
+        } catch (error) {
+            console.log(error)
+        } 
     }
-    const getCookie = async (body) => {
-
-        return await fetch(`${url}gettoken/`, {
-            method: 'GET',
-            credentials: 'include' // Include cookies in cross-origin requests
-        })
-        .then(response => response.json())
-        .then(data => {
-
-            const csrfToken = data.csrfToken;
-            console.log('This is token =>', csrfToken)
-
-            register(body, csrfToken)
-
-        })
-        .catch(error => {
-            console.error('Error fetching CSRF token:', error);
-        });
-    }
-
+    
     function togglePasswordVisibility() {
         const passwordField = document.getElementById("password");
         
@@ -148,8 +102,8 @@ const Registration = () => {
             <div id="registration-div">
             <h1>Login</h1>
             <form onSubmit={handleLogin}>
-                <label >Email</label>
-                <input name="email" ref={email}/>
+                <label >Username</label>
+                <input name="text" ref={email}/>
                 <label >Password</label>
                 <div class="password-container">
                     <input name="password" type="password" id='password' ref={password}/>

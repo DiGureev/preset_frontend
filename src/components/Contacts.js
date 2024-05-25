@@ -1,8 +1,6 @@
 import './HomePage/Home.css';
 import { useRef , useState} from 'react';
-
-const user_url = process.env.REACT_APP_USER_URL
-const contact_url = process.env.REACT_APP_CONTACT_URL
+import api from '../api';
 
 const Contacts = () => {
     const first = useRef()
@@ -12,64 +10,44 @@ const Contacts = () => {
 
     const [msg, setMsg] = useState('')
 
-
     const handleSubmit = async (e) => {
         e.preventDefault()
         const first_name = first.current.value
         const last_name = last.current.value
         const user_email = email.current.value
-        const message = text.current.value
+        let message = text.current.value
 
-        let csrfToken = await getCookie()
+        if (message === ""){
+            message = "No message"
+        }
 
         let body = {first_name: first_name , last_name: last_name, email: user_email, message: message}
 
         console.log(body)
 
-        await fetch(`${contact_url}add/`, {
-            method: 'POST',
-            headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRFToken': csrfToken, // Include the CSRF token in the headers
-                  
-                },
-                credentials: 'include', // Include cookies in cross-origin requests
-                body: JSON.stringify(body)
-        })
-        .then(response => response.json())
-        .then (json => {
-            console.log(json)
-            setMsg(json.msg)
+        try {
+            const res = await api.post(`/contact/add/`, body)
 
-            first.current.value = ''
-            last.current.value = ''
-            email.current.value = ''
-            text.current.value = ''
+            if (res.status === 201){
+                setMsg("Thank you! We have recieved your contact!")
 
-            setTimeout(()=>{
-                setMsg('')
-            }, 2000)
-        })
-    }
+                first.current.value = ''
+                last.current.value = ''
+                email.current.value = ''
+                text.current.value = ''
 
-    const getCookie = async () => {
-        let token = await fetch(`${user_url}gettoken/`, {
-            method: 'GET',
-            credentials: 'include' // Include cookies in cross-origin requests
-        })
-        .then(response => response.json())
-        .then(data => {
-            const csrfToken = data.csrfToken;
-            // console.log('This is token =>', csrfToken)
-            
-            return csrfToken
-        })
-        .catch(error => {
-            console.error('Error fetching CSRF token:', error);
-        });
+                setTimeout(()=>{
+                    setMsg('')
+                }, 2000)
+            } else {
+                setMsg("Something went wrong, please try again.")
+            }
 
-        return token
+            console.log(res.data)
 
+        } catch (err) {
+            console.log(err)
+        }
     }
 
     return (
