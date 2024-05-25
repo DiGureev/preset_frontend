@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { AppContext } from "../App.js";
+import { AppContext } from "../../App.js";
 import PlotPage from "./PlotPage.js";
 import WordTable from "./WordTable.js";
 import NetworkPlot from "./NetworkPlot.js";

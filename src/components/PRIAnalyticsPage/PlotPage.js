@@ -1,13 +1,12 @@
 import axios from 'axios';
 import { useState, useContext, useEffect, useRef } from "react";
-import { AppContext } from '../App.js';
+import { AppContext } from '../../App.js';
 import Plot from 'react-plotly.js';
 import NavButtons from "./NavButtons.js";
-import '../App.css';
+import '../../App.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleQuestion} from '@fortawesome/free-solid-svg-icons';
 import './Results.css'
-import { width } from '@fortawesome/free-solid-svg-icons/fa0';
 
 const url = process.env.REACT_APP_API_URL;
 

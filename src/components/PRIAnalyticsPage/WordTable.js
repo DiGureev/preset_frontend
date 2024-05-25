@@ -1,9 +1,9 @@
 import axios from "axios";
 import { useContext, useRef} from "react";
-import { AppContext } from "../App";
+import { AppContext } from "../../App.js";
 // import Table from 'react-bootstrap/Table';
 import NavButtons from "./NavButtons.js";
-import '../App.css';
+import '../../App.css';
 import './Results.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleQuestion} from '@fortawesome/free-solid-svg-icons';

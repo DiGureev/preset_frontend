@@ -1,12 +1,12 @@
 import { useRef, useContext, useState } from "react";
-import { AppContext } from "../App";
+import { AppContext } from "../../App.js";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash, faCircleArrowRight} from '@fortawesome/free-solid-svg-icons';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import './Registration.css'
-import api from "../api.js";
-import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constants";
+import api from "../../api.js";
+import { ACCESS_TOKEN, REFRESH_TOKEN } from "../../constants.js";
 
 
 const url = process.env.REACT_APP_USER_URL;

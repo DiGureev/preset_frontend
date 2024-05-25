@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
-import { AppContext } from '../App.js';
+import { AppContext } from '../../App.js';
 import { ForceGraph2D } from 'react-force-graph';
-import '../App.css';
+import '../../App.css';
 import NavButtons from "./NavButtons.js";
 
 const url = process.env.REACT_APP_API_URL;

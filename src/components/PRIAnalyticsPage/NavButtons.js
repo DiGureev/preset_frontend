@@ -1,8 +1,8 @@
 import { useState, useContext } from 'react';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
-import { AppContext } from '../App.js';
-import '../App.css';
+import { AppContext } from '../../App.js';
+import '../../App.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faList, faChartPie, faDiagramProject } from '@fortawesome/free-solid-svg-icons';
 

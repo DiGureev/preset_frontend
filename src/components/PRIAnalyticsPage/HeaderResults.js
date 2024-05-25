@@ -1,4 +1,4 @@
-import { AppContext } from "../App"
+import { AppContext } from "../../App"
 import { useContext } from "react"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFile} from '@fortawesome/free-solid-svg-icons';

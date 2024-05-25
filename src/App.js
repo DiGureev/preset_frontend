@@ -2,8 +2,8 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from './components/Navigation/Navbar.js';
 import { useState, createContext, useEffect } from 'react';
-import Registration from './components/Registration.js'
-import Analytics from './components/Analytics.js'
+import Registration from './components/LoginSignup/Registration.js'
+import Analytics from './components/PRIAnalyticsPage/Analytics.js'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './components/HomePage/Home.js'
 import Contacts from './components/Contacts.js';
@@ -12,10 +12,7 @@ import api from "./api.js";
 import { REFRESH_TOKEN, ACCESS_TOKEN } from "./constants";
 import NotFound from './components/NotFound.js';
 
-
 export const AppContext = createContext();
-const url = process.env.REACT_APP_USER_URL;
-
 
 function App() {
   // The words user added to the kiWI or plot
@@ -139,48 +136,6 @@ function App() {
       }
 
     }
-
-// const auth = async (csrfToken) => {
-//   // var csrftoken = getCookie('csrftoken');
-
-//   let res = await fetch(`${url}session/`, {
-//       method: 'GET',
-//       headers: {
-//               'Content-Type': 'application/json',
-//               'X-CSRFToken': csrfToken, // Include the CSRF token in the headers
-            
-//           },
-//           credentials: 'include', // Include cookies in cross-origin requests
-//   })
-//   let data = await res.json()
-
-//   console.log(data)
-
-//   if (data.isauth === true){
-//     setLog(true)
-//     setUsername(data.username)
-//   } else {
-//     setLog(false)
-//   }
-
-// }
-// const getCookie = async () => {
-
-//   await fetch(`${url}gettoken/`, {
-//       method: 'GET',
-//       credentials: 'include' // Include cookies in cross-origin requests
-//   })
-//   .then(response => response.json())
-//   .then(data => {
-//       const csrfToken = data.csrfToken;
-//       console.log('This is token =>', csrfToken)
-//       auth(csrfToken)
-//   })
-//   .catch(error => {
-//       console.error('Error fetching CSRF token:', error);
-//   });
-
-// }
   
   return (
       <AppContext.Provider value={{username, setUsername, logged, setLog, download, docName, setDocName, addedWords, setWords, file_path, setPath, keywordsFetched, setKeywordsFetched, kiwiTable, setKiwiTable, table, setTable, grasp, setGrasp, matrix, setMatrix, csvUrl, setURL}}>

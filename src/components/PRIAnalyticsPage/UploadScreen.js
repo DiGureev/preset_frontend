@@ -6,6 +6,7 @@ import { faFile, faCircleArrowUp } from '@fortawesome/free-solid-svg-icons';
 import "./UploadScreen.css"
 import {AppContext} from "../../App.js";
 import { useNavigate } from "react-router-dom";
+import Previous from "./Previous.js";
 
 export const UploadContext = createContext();
 
@@ -17,14 +18,33 @@ const UploadScreen = () => {
   const [msg, setMsg] = useState('');
   const [display, setDisplay] = useState('none')
   const {logged} = useContext(AppContext)
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
 
+  useEffect(()=>{
+    if(!logged) {
+      setTimeout(()=>{
+        navigate("/login")
+      }, 1500)
+      
+    }
+  })
+
   const handleUploadWindow = () => {
+    const popup = document.getElementById("link-file-container");
+    console.log(popup)
+
     if (display === 'none') {
+      setTimeout(() => {
+          popup.style.opacity = '1'; // Transition to fully visible
+      }, 10); // Delay to ensure transition starts
       setDisplay('');
     } else {
-      setDisplay('none');
+      popup.style.opacity = '0'; // Transition to fully hidden
+      setTimeout(() => {
+          setDisplay('none');
+      }, 500);
     }
   };
 
@@ -33,7 +53,8 @@ const UploadScreen = () => {
   };
 
 
-return (
+if (logged) {return (
+  <>
     <div id="upload-container" onClick={handleUploadWindow}>
       <h1 className="introText">Upload your document</h1>
       <div id="upload-main">
@@ -42,9 +63,9 @@ return (
         <button><FontAwesomeIcon icon={faCircleArrowUp} /> Upload</button>
       </div>
 
-      <div className="link-file-container" style={{display: display}} onClick={(e) => handleClickInside(e)}>
+      <div id="link-file-container" style={{display: display}} onClick={(e) => handleClickInside(e)}>
         <div id="close-upload" onClick={handleUploadWindow}>x</div>
-        <UploadContext.Provider value={{url, setMsg, setDisplay}}>
+        <UploadContext.Provider value={{url, setMsg, setDisplay, setIsLoading}}>
           <File/>
           <div id="or-container">
               <div className="line"></div>
@@ -55,8 +76,19 @@ return (
         </UploadContext.Provider>
         {msg}
       </div>
+
+      {isLoading && (
+                <div className="loading-container">
+                    <div className="loading-spinner"></div>
+                    <div>Loading...</div>
+                </div>
+            )}
     </div>
-  );
+    <Previous />
+    </>
+  )} else {
+    return <div id="upload-container"><h2>Please, Log in to start working.</h2></div>
+  }
 }
 
 export default UploadScreen;

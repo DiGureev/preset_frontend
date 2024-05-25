@@ -18,10 +18,9 @@ const File = () => {
     // disable the button if nothing uploaded
     const [isButtonDisabled, setIsButtonDisabled] = useState(true);
     // to show loading div while loading
-    const [isLoading, setIsLoading] = useState(false); 
 
     const { download, docName, setDocName, setPath, setKeywordsFetched, setKiwiTable, setTable } = useContext(AppContext);
-    const { url, setMsg, setDisplay } = useContext(UploadContext);
+    const { url, setMsg, setDisplay, setIsLoading } = useContext(UploadContext);
 
     useEffect(() => {
         if (file) {
@@ -119,13 +118,7 @@ const File = () => {
                 <div style={{ marginTop: "10px", fontSize: "0.8rem" }}>{file && `${file.name} - ${file.type}`}</div>
             </div>
             <button onClick={handleUploadClick} disabled={isButtonDisabled}>Get the keywords <FontAwesomeIcon icon={faCircleArrowRight}/></button>
-            {/* Loading process div */}
-            {isLoading && (
-                <div className="loading-container">
-                    <div className="loading-spinner"></div>
-                    <div>Loading...</div>
-                </div>
-            )}
+            
         </div>
     );
 }

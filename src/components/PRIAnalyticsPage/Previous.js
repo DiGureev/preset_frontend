@@ -1,16 +1,15 @@
 import { useContext, useEffect, useState } from "react";
-import { AppContext } from "../App";
+import { AppContext } from "../../App";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faFile} from '@fortawesome/free-solid-svg-icons';
-import api from "../api";
+import api from "../../api";
 import './Previous.css'
-import { tab } from "@testing-library/user-event/dist/tab";
 
 // const kiwi_url = process.env.REACT_APP_KIWI_URL;
 const user_url = process.env.REACT_APP_USER_URL
 
 const Previous = () => {
-    const {logged,setKiwiTable, download, kiwitable, setPath, setKeywordsFetched,setTable, setDocName} = useContext(AppContext)
+    const {setKiwiTable, download, kiwitable, setPath, setKeywordsFetched,setTable, setDocName} = useContext(AppContext)
     const [listOfTables, setList] = useState([])
 
     useEffect(()=>{
@@ -52,32 +51,9 @@ const Previous = () => {
         } catch (err){
             console.log(err)
         }
-
-        
-    
     }
 
-    // const getCookie = async () => {
-    //     let token = await fetch(`${user_url}gettoken/`, {
-    //         method: 'GET',
-    //         credentials: 'include' // Include cookies in cross-origin requests
-    //     })
-    //     .then(response => response.json())
-    //     .then(data => {
-    //         const csrfToken = data.csrfToken;
-    //         // console.log('This is token =>', csrfToken)
-            
-    //         return csrfToken
-    //     })
-    //     .catch(error => {
-    //         console.error('Error fetching CSRF token:', error);
-    //     });
-
-    //     return token
-
-    // }
-
-    if (logged) {return <div id="previous-div">
+    return <div id="previous-div">
             <h3>Recent</h3>
             <div id="prev-subtitle">
                 <p>Jump back to your last queries</p>
@@ -121,10 +97,7 @@ const Previous = () => {
                     })
                 }
             </div>
-        </div>} else {
-                        return <div id="previous-div"> <h3>To see your previous docs please Log in.</h3> </div>
-                    } 
- 
+        </div>
 }
 
 export default Previous

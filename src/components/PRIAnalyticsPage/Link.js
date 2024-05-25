@@ -13,11 +13,10 @@ const Link = () => {
     const linkInput = useRef('');
     // disable the button if nothing uploaded
     const [linkUploaded, setLinkUploaded] = useState(true);
-    // to show loading div while loading
-    const [isLoading, setIsLoading] = useState(false); 
+    // to show loading div while loading 
 
     const { download, docName, setDocName, setPath, setKeywordsFetched, setKiwiTable, setTable } = useContext(AppContext);
-    const { url, setMsg, setDisplay } = useContext(UploadContext);
+    const { url, setMsg, setDisplay, setIsLoading } = useContext(UploadContext);
 
     useEffect(() => {
         handleInputChange({ target: { value: linkInput.current.value } });
@@ -93,13 +92,7 @@ const Link = () => {
                 <input type="text" placeholder="https://example.com/document-scan" ref={linkInput} onChange={handleInputChange} />
             </div>
             <button onClick={fetchData} disabled={!linkUploaded}>Get the keywords <FontAwesomeIcon icon={faCircleArrowRight}/></button>
-            {/* Loading process div */}
-            {isLoading && (
-                <div className="loading-container">
-                    <div className="loading-spinner"></div>
-                    <div>Loading...</div>
-                </div>
-            )}
+
         </div>
     );
 }
