@@ -28,3 +28,12 @@
     font-size: 2rem;
     color: #2B58E1;
 }
+
+.load-another-doc-div {
+    position: absolute;
+    margin: 1rem;
+    top: 0;
+    right: 0;
+    color: #2B58E1;
+
+}

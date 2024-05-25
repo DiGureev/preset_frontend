@@ -6,7 +6,7 @@ import './HeaderResults.css'
 
 const HeaderResults = () => {
 
-    const {docName, table, grasp, matrix} = useContext(AppContext)
+    const {docName, table, grasp, matrix, keywordsFetched, setKeywordsFetched} = useContext(AppContext)
     let filename = docName.slice(0,8) + '...pdf'
 
     console.log(filename)
@@ -21,6 +21,7 @@ const HeaderResults = () => {
                         <FontAwesomeIcon icon={faFile} className="filename-icon"/>
                         <p>{filename}</p>
                     </div>
+                    {keywordsFetched ? <div onClick={()=>setKeywordsFetched(false)} className="load-another-doc-div">Load another document</div> : <div onClick={()=>setKeywordsFetched(true)} className="load-another-doc-div">Hide Upload</div>}
                 </div>
             )}
             {grasp && (
@@ -31,6 +32,7 @@ const HeaderResults = () => {
                         <FontAwesomeIcon icon={faFile} className="filename-icon"/>
                         <p>{filename}</p>
                     </div>
+                   {keywordsFetched ? <div onClick={()=>setKeywordsFetched(false)} className="load-another-doc-div">Load another document</div> : <div onClick={()=>setKeywordsFetched(true)} className="load-another-doc-div">Hide Upload</div>}
                 </div>
             )}
 
@@ -42,6 +44,7 @@ const HeaderResults = () => {
                         <FontAwesomeIcon icon={faFile} className="filename-icon"/>
                         <p>{filename}</p>
                     </div>
+                    {keywordsFetched ? <div onClick={()=>setKeywordsFetched(false)} className="load-another-doc-div">Load another document</div> : <div onClick={()=>setKeywordsFetched(true)} className="load-another-doc-div">Hide Upload</div>}
                 </div>
             )}
         </>

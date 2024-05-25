@@ -22,7 +22,7 @@ const WordTable = ( ) => {
                 };
 
       try {
-          const response  = await axios.post(`${url}add`, body);
+          const response  = await axios.post(`${url}add/`, body);
           let data        = response.data;
           const keywords  = data.kiwi_table;
           setKiwiTable(keywords);

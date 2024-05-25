@@ -2,11 +2,15 @@ import UploadScreen from './PRIAnalyticsPage/UploadScreen.js';
 import Previous from './Previous.js';
 import Results from './Results.js';
 import { AppContext } from '../App.js';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 
 
 const Analytics = ()=>{
       const {keywordsFetched} = useContext(AppContext)
+
+      useEffect(()=>{
+
+      },[keywordsFetched])
 
         return (
         <>

@@ -18,9 +18,9 @@ const PlotPage = () => {
     const { file_path, kiwiTable} = useContext(AppContext);
     const additionalWords = useRef('');
 
-    const addWords = async () => {
-        setSelectedWord(additionalWords.current.value)
-    }
+    // const addWords = async () => {
+    //     setSelectedWord(additionalWords.current.value)
+    // }
 
     const getPlot = async () => {
         let selected = selectedWord || (kiwiTable.length > 0 ? kiwiTable[0].Word : '');
@@ -31,7 +31,7 @@ const PlotPage = () => {
         };
 
         try {
-            const response = await axios.post(`${url}plot`, body);
+            const response = await axios.post(`${url}plot/`, body);
             const data = response.data;
             const plotData = JSON.parse(data.plot);
             setPlot(plotData.data);

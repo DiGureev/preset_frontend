@@ -25,7 +25,7 @@ const NetworkPlot = () => {
         };
 
         try {
-            const response = await axios.post(`${url}matrix`, body);
+            const response = await axios.post(`${url}matrix/`, body);
             let data = response.data;
             const mat = JSON.parse(data.matrix);
 
