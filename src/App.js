@@ -43,6 +43,7 @@ function App() {
   useEffect(()=>{
 
     auth().catch(()=> setLog(false))
+    getUserInfo()
 
   }, [])
 
@@ -124,6 +125,17 @@ function App() {
           await refreshToken()
       } else {
           setLog(true)
+      }
+
+    }
+
+    const getUserInfo = async () => {
+
+      try {
+        const res = await api.get(`/user/info/`)
+        setUsername(res.data.username)
+      } catch (err) {
+        console.log(err)
       }
 
     }

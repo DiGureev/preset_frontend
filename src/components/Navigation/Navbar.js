@@ -7,55 +7,28 @@ import { Link } from 'react-router-dom';
 import { useContext } from "react";
 import { AppContext } from "../../App";
 import { useNavigate } from "react-router-dom";
-
-const url = process.env.REACT_APP_USER_URL;
+import { ACCESS_TOKEN, REFRESH_TOKEN } from '../../constants';
 
 const Navbar = () => {
     const {logged, username, setLog} = useContext(AppContext)
     const navigate = useNavigate()
 
-    const handleLogOut = (e) => {
-        getCookie()
+    const handleLogOut = () => {
+        logout()
     }
 
-    const logout = async (csrfToken) => {
-        // var csrftoken = getCookie('csrftoken');
-      
-        let res = await fetch(`${url}log-out/`, {
-            method: 'GET',
-            headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRFToken': csrfToken, // Include the CSRF token in the headers
-                  
-                },
-                credentials: 'include', // Include cookies in cross-origin requests
-        })
-        let data = await res.json()
-      
-        console.log(data)
-      
-        if (res.status === 200){
-          setLog(false)
-          navigate("/");
-        }
-      }
+    const logout = async () => {
+        
+        try{
+            localStorage.removeItem(ACCESS_TOKEN);
+            localStorage.removeItem(REFRESH_TOKEN);
 
-      const getCookie = async () => {
-      
-        const res = await fetch(`${url}gettoken/`, {
-            method: 'GET',
-            credentials: 'include' // Include cookies in cross-origin requests
-        })
-        .then(response => response.json())
-        .then(data => {
-            const csrfToken = data.csrfToken;
-            console.log('This is token =>', csrfToken)
-            logout(csrfToken)
-        })
-        .catch(error => {
-            console.error('Error fetching CSRF token:', error);
-        });
-      
+            setLog(false);
+            navigate("/");
+
+        } catch (err) {
+            console.log(err)
+        }
       }
 
     return (

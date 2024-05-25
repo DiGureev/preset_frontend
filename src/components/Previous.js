@@ -77,7 +77,7 @@ const Previous = () => {
 
     // }
 
-    return    <div id="previous-div">
+    if (logged) {return <div id="previous-div">
             <h3>Recent</h3>
             <div id="prev-subtitle">
                 <p>Jump back to your last queries</p>
@@ -121,7 +121,9 @@ const Previous = () => {
                     })
                 }
             </div>
-        </div>
+        </div>} else {
+                        return <div id="previous-div"> <h3>To see your previous docs please Log in.</h3> </div>
+                    } 
  
 }
 
