@@ -6,7 +6,6 @@ import { faFile, faCircleArrowUp } from '@fortawesome/free-solid-svg-icons';
 import "./UploadScreen.css"
 import {AppContext} from "../../App.js";
 import { useNavigate } from "react-router-dom";
-import Previous from "./Previous.js";
 
 export const UploadContext = createContext();
 
@@ -88,7 +87,6 @@ if (logged && !isSmallScreen) {return (
                 </div>
             )}
     </div>
-    <Previous />
     </>
   )} else if (!logged && !isSmallScreen) {
     return <div id="upload-container"><h2>Please, Log in to start working.</h2></div>
