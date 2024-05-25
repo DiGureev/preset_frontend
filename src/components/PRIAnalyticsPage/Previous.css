@@ -34,3 +34,13 @@
 .docs-name {
     margin-left: 2rem;
 }
+
+@media only screen and (max-width: 768px) {
+    #previous-div {
+        width: 80%;
+    }
+
+    #prev-subtitle #link {
+        display: none;
+    }
+}

@@ -14,7 +14,7 @@
 #first-screen h1 {
     font-size: 3rem;
     letter-spacing: 0.5vh;
-    max-width: 30vw;
+    width: 30vw;
 }
 
 #first-screen-text p {
@@ -225,3 +225,95 @@ input:focus {
     margin: auto;
 }
 
+
+@media only screen and (max-width: 768px){
+    #first-screen h1 {
+        width: 100%;
+    }
+
+    #first-screen {
+        height: fit-content;
+    }
+
+    .main-description .text {
+        width: 80vw;
+        margin: auto;
+        margin-bottom: 2rem;
+    }
+
+    #clients {
+        flex-direction: column;
+        padding: 2rem;
+    }
+
+    #clients h2 {
+        padding: 0;
+        margin-bottom: 2rem;
+    }
+
+    #clients-icons {
+        display: flex;
+        flex-wrap: wrap;
+        text-align: left;
+    }
+
+    .item-icon {
+        width: 40%;
+    }
+
+    #differentiators {
+        padding: 2rem;
+    }
+
+    #differentiators-items {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    #differentiators-items h3 {
+       min-height: 5vh;
+
+    }
+
+    .description {
+        font-size: 1.4rem;
+    }
+
+    #numbers-items {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    #partnerships {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 2rem;
+    }
+
+    #partnerships-description {
+        width: 100%;
+        font-size: 1.5rem;
+        margin: 0;
+        margin-bottom: 2rem;
+    }
+
+    #contacts {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin: 2rem;
+        margin-top: 0;
+    }
+
+    .map {
+        display: none;
+    }
+
+    .container {
+        padding: 0;
+    }
+
+}

@@ -57,7 +57,7 @@ const Previous = () => {
             <h3>Recent</h3>
             <div id="prev-subtitle">
                 <p>Jump back to your last queries</p>
-                <p style={{color: '#2B58E1', fontWeight:'500'}}>See all</p>
+                <p id="link" style={{color: '#2B58E1', fontWeight:'500'}}>See all</p>
             </div>
             <div>
                 {

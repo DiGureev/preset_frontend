@@ -36,7 +36,7 @@ const Navbar = () => {
             <Link to="/" className='logo'><img src={Logo} alt="priset-logo" /></Link>
             <div id='navbar-items'>
                 <Link to="/analytics"><div className='menu-item'>PRI Analytics</div></Link>
-                <Link to="/contacts"><div className='menu-item'>Contact Us</div></Link>
+                <Link to="/contacts"><div className='menu-item contact'>Contact Us</div></Link>
             </div>
             {logged? <div className='username'>
                 <div id='username-icon'><FontAwesomeIcon icon={faUser} /></div>

@@ -20,6 +20,10 @@ const UploadScreen = () => {
   const {logged} = useContext(AppContext)
   const [isLoading, setIsLoading] = useState(false);
 
+  const isSmallScreen = window.innerWidth <= 768;
+
+  console.log(isSmallScreen)
+
   const navigate = useNavigate();
 
   useEffect(()=>{
@@ -53,7 +57,7 @@ const UploadScreen = () => {
   };
 
 
-if (logged) {return (
+if (logged && !isSmallScreen) {return (
   <>
     <div id="upload-container" onClick={handleUploadWindow}>
       <h1 className="introText">Upload your document</h1>
@@ -86,8 +90,10 @@ if (logged) {return (
     </div>
     <Previous />
     </>
-  )} else {
+  )} else if (!logged && !isSmallScreen) {
     return <div id="upload-container"><h2>Please, Log in to start working.</h2></div>
+  } else if (logged && isSmallScreen) {
+    return <div id="upload-container"><h2>Sorry, Priset Analytics is only available for desktops.</h2></div>
   }
 }
 

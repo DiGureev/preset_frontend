@@ -52,3 +52,17 @@ a {
 #username-icon {
     margin-right: 10px;
 }
+
+
+@media only screen and (max-width: 768px) {
+    .menu-item.contact {
+        display: none;
+    }
+
+    .username{
+        font-size: 1rem;
+        margin-right: 10px;
+    }
+
+    
+}

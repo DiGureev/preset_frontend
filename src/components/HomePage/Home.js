@@ -94,7 +94,7 @@ const Home = () => {
         </div>
         <Contacts/>
     </div>
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2661.9354717480296!2d11.564435275805614!3d48.15004925029359!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x479e75ef4cbc7a41%3A0x22afed18eec3f727!2sTUM%20School%20of%20Management!5e0!3m2!1sen!2sil!4v1714835446351!5m2!1sen!2sil" style={{border: "0", width: "100vw", height: "40vh", marginBottom: "2rem"}} allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <iframe className="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2661.9354717480296!2d11.564435275805614!3d48.15004925029359!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x479e75ef4cbc7a41%3A0x22afed18eec3f727!2sTUM%20School%20of%20Management!5e0!3m2!1sen!2sil!4v1714835446351!5m2!1sen!2sil" style={{border: "0", width: "100vw", height: "40vh", margin: "2rem"}} allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     <p className='copyright'>© 2024, PRISET</p>
     </>
     )
