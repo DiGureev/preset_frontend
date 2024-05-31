@@ -1,25 +1,29 @@
 import axios from 'axios';
 import { useRef, useContext, useState, useEffect } from 'react';
 import { UploadContext } from './UploadScreen.js';
-import { AppContext } from '../App.js';
-import '../App.css';
+import { AppContext } from '../../App.js';
 import '../Button.css';
+import "./UploadScreen.css"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faCircleArrowRight} from '@fortawesome/free-solid-svg-icons';
+import api from '../../api.js';
+
 
 const Link = () => {
     const linkInput = useRef('');
     // disable the button if nothing uploaded
     const [linkUploaded, setLinkUploaded] = useState(true);
-    // to show loading div while loading
-    const [isLoading, setIsLoading] = useState(false); 
+    // to show loading div while loading 
 
-    const { download, setDocName, setPath, setKeywordsFetched, setKiwiTable, setTable } = useContext(AppContext);
-    const { url, setMsg } = useContext(UploadContext);
+    const { download, docName, setDocName, setPath, setKeywordsFetched, setKiwiTable, setTable } = useContext(AppContext);
+    const { url, setMsg, setDisplay, setIsLoading } = useContext(UploadContext);
 
     useEffect(() => {
         handleInputChange({ target: { value: linkInput.current.value } });
     }, []);
 
     const fetchData = async () => {
+        setDisplay('none')
         setMsg('');
         setIsLoading(true); 
 
@@ -49,12 +53,33 @@ const Link = () => {
                 setKeywordsFetched(true);
                 setTable(true);
                 linkInput.current.value = ''
+
+                saveTableInDB(name, keywords, path)
             }
         } catch (error) {
             console.error('There was an error:', error);
         } finally {
             setIsLoading(false); 
         }
+    }
+
+    const saveTableInDB = async (name, table, path) => {
+        let new_name = name.replace('-Kiwi.csv', '')
+
+        let body = {
+            name: new_name, 
+            table: JSON.stringify({kiwitable: table}), 
+            path: path}
+
+        console.log('body => ', body)
+        try{
+            const res = await api.post(`/kiwi/all/`, body)
+            console.log(res.data)
+        } catch (err) {
+            console.log(err)
+        }
+        
+        
     }
 
     const handleInputChange = (event) => {
@@ -64,16 +89,10 @@ const Link = () => {
     return (
         <div className='upload-input'>
             <div className='upload-content'>
-                <input type="text" placeholder="Link" ref={linkInput} onChange={handleInputChange} style={{ minWidth: "322px", width: "90%", border: "1px solid #685E5E", padding: "8px", borderRadius: "5px" }} />
+                <input type="text" placeholder="https://example.com/document-scan" ref={linkInput} onChange={handleInputChange} />
             </div>
-            <button onClick={fetchData} disabled={!linkUploaded}>Get the keywords</button>
-            {/* Loading process div */}
-            {isLoading && (
-                <div className="loading-container">
-                    <div className="loading-spinner"></div>
-                    <div>Loading...</div>
-                </div>
-            )}
+            <button onClick={fetchData} disabled={!linkUploaded}>Get the keywords <FontAwesomeIcon icon={faCircleArrowRight}/></button>
+
         </div>
     );
 }

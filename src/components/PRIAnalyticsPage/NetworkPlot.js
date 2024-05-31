@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
-import { AppContext } from '../App.js';
+import { AppContext } from '../../App.js';
 import { ForceGraph2D } from 'react-force-graph';
-import '../App.css';
+import '../../App.css';
 import NavButtons from "./NavButtons.js";
 
 const url = process.env.REACT_APP_API_URL;
@@ -25,7 +25,7 @@ const NetworkPlot = () => {
         };
 
         try {
-            const response = await axios.post(`${url}matrix`, body);
+            const response = await axios.post(`${url}matrix/`, body);
             let data = response.data;
             const mat = JSON.parse(data.matrix);
 
@@ -45,11 +45,12 @@ const NetworkPlot = () => {
 
     return (
         <div className="result-div">
+              <NavButtons/>
             <h2>From Text-base to Knowledge-base</h2>
                 <div style={{display: "flex", justifyContent: "center"}}>
                     <ForceGraph2D
                         graphData={matrix}
-                        backgroundColor={'white'}
+                        backgroundColor={'#E0E7FB'}
                         linkColor = {"white"}
                         width={displayWidth*0.6}
                         height={400}
@@ -80,7 +81,7 @@ const NetworkPlot = () => {
                     />
                 </div>
             {/* The buttons at the bottom of the page to switch between the components */}
-            <NavButtons/>
+          
         </div>
     )
 }

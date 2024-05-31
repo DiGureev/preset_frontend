@@ -1,22 +1,26 @@
 import axios from 'axios';
 import { useState, useContext, useEffect } from 'react';
 import { UploadContext } from './UploadScreen.js';
-import { AppContext } from '../App.js';
+import { AppContext } from '../../App.js';
 import { FileUploader } from "react-drag-drop-files";
 import '../Button.css';
-import '../App.css';
+import "./UploadScreen.css"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faCircleArrowRight} from '@fortawesome/free-solid-svg-icons';
+import api from '../../api.js';
+
 
 const fileTypes = ["PDF"];
+
 
 const File = () => {
     const [file, setFile] = useState('');
     // disable the button if nothing uploaded
     const [isButtonDisabled, setIsButtonDisabled] = useState(true);
     // to show loading div while loading
-    const [isLoading, setIsLoading] = useState(false); 
 
-    const { download, setDocName, setPath, setKeywordsFetched, setKiwiTable, setTable } = useContext(AppContext);
-    const { url, setMsg } = useContext(UploadContext);
+    const { download, docName, setDocName, setPath, setKeywordsFetched, setKiwiTable, setTable } = useContext(AppContext);
+    const { url, setMsg, setDisplay, setIsLoading } = useContext(UploadContext);
 
     useEffect(() => {
         if (file) {
@@ -38,6 +42,8 @@ const File = () => {
             setMsg('Please, upload the file');
             return;
         }
+
+        setDisplay('none')
 
         setIsLoading(true); 
 
@@ -68,6 +74,9 @@ const File = () => {
             setTable(true);
 
             setFile('')
+
+            saveTableInDB(name, keywords, path)
+
         } catch (error) {
             console.error('There was an error:', error);
         } finally {
@@ -75,20 +84,41 @@ const File = () => {
         }
     };
 
+    const saveTableInDB = async (name, table, path) => {
+        name = name.replace('-Kiwi.csv', '')
+
+        let body = {
+            name: name, 
+            table: JSON.stringify({kiwitable: table}), 
+            path: path}
+
+        console.log('body => ', body)
+        try{
+            const res = await api.post(`/kiwi/all/`, body)
+            console.log(res.data)
+        } catch (err) {
+            console.log(err)
+        }
+        
+        
+    }
+
     return (
         <div className='upload-input'>
             <div className='upload-content'>
-                <FileUploader width="50%" handleChange={handleFileChange} name="file" types={fileTypes} />
+                <FileUploader 
+                    width="50%" 
+                    handleChange={handleFileChange} 
+                    name="file" 
+                    types={fileTypes} >
+                    <div className="file-uploader-text">
+                        <p><u>Select documents</u> or simply drop it here</p>
+                    </div>
+                </FileUploader>
                 <div style={{ marginTop: "10px", fontSize: "0.8rem" }}>{file && `${file.name} - ${file.type}`}</div>
             </div>
-            <button onClick={handleUploadClick} disabled={isButtonDisabled}>Get the keywords</button>
-            {/* Loading process div */}
-            {isLoading && (
-                <div className="loading-container">
-                    <div className="loading-spinner"></div>
-                    <div>Loading...</div>
-                </div>
-            )}
+            <button onClick={handleUploadClick} disabled={isButtonDisabled}>Get the keywords <FontAwesomeIcon icon={faCircleArrowRight}/></button>
+            
         </div>
     );
 }

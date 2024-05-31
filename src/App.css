@@ -1,50 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: 'DM Sans';
 }
+
+
 
 /* body {
  background-color: rgb(12, 25, 63);
 } */
 
-.loading-container {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 9999;
-  background-color: #0C193F;
-  color: white;
-  font-size: 15pt;
-  padding: 25px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  border-radius: 5%;
-}
 
-.loading-spinner {
-  width: 48px;
-  height: 48px;
-  border: 5px solid #ededed;
-  border-bottom-color: transparent;
-  border-radius: 50%;
-  display: inline-block;
-  box-sizing: border-box;
-  animation: rotation 1s linear infinite;
-}
-
-@keyframes rotation {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
-}
 
 #search_word {
   padding: 8px;
@@ -56,28 +25,27 @@
 }
 
 .toggle-btn {
-  background-color: #23C684 !important;
-  border: 1px solid #0C193F  !important;
+  background-color: white !important;
+  border: 1px solid #2B58E1  !important;
   padding: 10px;
-  text-transform: uppercase;
-  color: #0C193F !important;
-  font-weight: 700 !important;
+  color: #2B58E1 !important;
+  font-weight: 500 !important;
+  margin-right: 1rem;
 }
 
 .active {
   color: white !important;
+  background-color: #2B58E1 !important;
 }
 
-#toggle-btn-div {
+.btn-group {
   width: 80%;
   margin: auto;
   text-align: center;
   display: flex;
-  padding-top: 2rem;
+  padding-bottom: 2rem;
   justify-content: center;
 }
-
-
 
 #nav-buttons {
   display: flex;
@@ -90,32 +58,9 @@
   min-width: 300px;
 }
 
-.link-file-container {
-  display: flex;
-  flex-wrap: wrap;
-  width: 80vw;
-  margin: auto;
-  justify-content: space-around;
-}
 .custom-navbar-bg {
   background-color: white;
   height: 12vh;
-}
-
-#previous-div {
-  background-color: rgba(255, 255, 255, 0.9);
-  padding: 1rem;
-  margin: 2% 0;
-}
-
-#previous-btn {
-  padding: 1rem;
-  background-color: #FFCF5C;
-  border-radius: 5px;
-  border: 0;
-  text-align: left;
-  color: #685E5E;
-  min-width: 120px;
 }
 
 /* .main {
@@ -128,7 +73,8 @@
   grid-template-columns: 1fr;
   grid-template-rows: auto auto auto;
   gap: 20px;
-  background-color: rgb(12, 25, 63);
+  background-color: white (12, 25, 63);
+  color: #1E1E1E;
   min-height: 100vh;
 }
 
@@ -152,12 +98,12 @@
 }
 
 h1 {
-  color: white;
+  color: #1E1E1E;
   margin-bottom: 2rem;
   margin-top: 0;
 }
 
-.upload-input {
+/* .upload-input {
   width: calc(50% - 10px);
   padding: 20px;
   border: 0;
@@ -165,13 +111,12 @@ h1 {
   display: flex;
   flex-direction: column;
   align-content: space-between;
-  background-color:white ;
   min-width: 378px;
   margin-right: 5px;
   margin-bottom: 15px;
-}
+} */
 
-.upload-content {
+/* .upload-content {
   width: calc(50% - 10px);
   padding: 10px; 
   text-align: center;
@@ -181,12 +126,11 @@ h1 {
   justify-content: center;
   margin: auto;
   margin-bottom: 15px;
-}
+} */
 
 
 
 .introText{
-  color: white;
   margin-bottom: 15px;
   text-align: center;
 }
@@ -208,14 +152,14 @@ h1 {
   flex-wrap: wrap;
 }
 
-#additional-words {
+/* #additional-words {
   display: flex;
   width: 60%;
   margin: auto;
   flex-wrap: wrap;
   flex-direction: column;
   padding: 1rem;
-}
+} */
 
 #download_csv a {
   color: white;
@@ -233,15 +177,15 @@ h1 {
 
 #content {
   display: flex;
-  width: 100%;
+  width: 80%;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-around;
   padding-bottom: 1rem;
   padding-top: 1rem;
   margin: auto;
 }
 
-#table-content {
+/* #table-content {
   padding: 1rem;
   height: 300px;
   overflow: scroll;
@@ -249,25 +193,31 @@ h1 {
   margin: auto;
   margin-bottom: 2rem;
   overflow-y: auto;
-}
+} */
 
-table thead tr:first-child th {
+/* table thead tr:first-child th {
   position: sticky;
   top: 0px;
   background-color: #afc8f0;
+} */
+
+.copyright {
+  font-size: 1.2rem;
+  color: grey;
+  text-align: center;
 }
 
 @media only screen and (max-width: 768px) {
-  .upload-input {
+  /* .upload-input {
     width: 70%;
     margin-bottom: 15px;
-  }
+  } */
 
-  .upload-content {
+  /* .upload-content {
     width: 70%;
     margin-bottom: 15px;
     margin-top: 15px;
-  }  
+  }   */
 
   #content {
     flex-direction: column;

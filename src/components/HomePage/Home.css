@@ -1,0 +1,319 @@
+* {
+    box-sizing: border-box;
+}
+
+#first-screen {
+    background-image: url('./img/homepage-background.jpg');
+    background-size: cover;
+    height: 80vh;
+    padding: 5rem;
+    color: white;
+    margin-bottom: 2rem;
+}
+
+#first-screen h1 {
+    font-size: 3rem;
+    letter-spacing: 0.5vh;
+    width: 30vw;
+}
+
+#first-screen-text p {
+    font-size: 1.5rem;
+    font-weight: 200;
+}
+
+.main-description {
+    max-width: 800px;
+    margin: auto;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+}
+
+.text {
+    font-size: 1.2rem;
+    letter-spacing: 0.1vh;
+}
+
+#line {
+    width: 100%;
+    height: 1px;
+    background-color: #0C143D;
+    margin-top: 2rem;
+}
+
+#clients {
+    background-color: #E0E7FB;
+    padding: 5rem;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#clients-icons {
+    display: grid;
+    width: 70%;
+    grid-template-columns: 30% 30% 30%;
+    gap: 2rem;
+}
+
+.item-icon {
+    width: 100%;
+    /* height: 200px; */
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.item-icon img {
+    width: 90%;
+}
+
+h2 {
+    font-size: 2.5rem;
+    letter-spacing: 0.2vh;
+}
+
+#clients h2 {
+    padding-right: 5rem;
+}
+
+#differentiators {
+    width: 100%;
+}
+
+#differentiators h2, #numbers h2 {
+    text-align: center;
+}
+
+#differentiators-items {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    gap: 3rem;
+    text-align: center;
+    padding-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.differentiators-icon {
+    font-size: 5rem;
+    color: #0C143D;
+}
+
+#differentiators-items h3 {
+    font-size: 1.5rem;
+    letter-spacing: 0.1vh;
+    min-height: 10vh;
+    height: fit-content;
+    margin-bottom: 10px;
+}
+
+.description {
+    font-weight: 200;
+}
+
+#numbers {
+    background-color: #0C143D;
+    padding: 2rem 7rem;
+    color: white;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+#numbers h3 {
+    font-size: 3rem;
+    letter-spacing: 0.1vh;
+}
+
+#numbers-items {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 3rem;
+    margin-top: 2rem;
+}
+
+.numbers-description {
+    font-size: 1.2rem;
+    font-weight: 200;
+}
+
+#partnerships {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: center;
+    padding: 2rem 7rem;
+}
+
+.partnerships-icon {
+    width: 100px;
+    height: 100px;
+}
+
+.partnerships-icon img {
+    width: 100%;
+}
+
+#partnerships-description {
+    width: 45%;
+    margin-right: 5rem;
+}
+
+#partnerships-description h2 {
+    font-size: 2rem;
+    letter-spacing: 0.2vh;
+    margin-bottom: 2rem;
+}
+
+#partnerships-description p, #contacts p {
+    font-size: 1.2rem;
+    font-weight: 200;
+    margin-bottom: 0;
+}
+
+.partnerships-header {
+    font-size: 0.8rem;
+    letter-spacing: 0.3vh;
+    max-width: 80%;
+    margin-bottom: 2rem;
+}
+
+#contacts {
+    margin: 5rem 5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 2rem;
+}
+
+#contacts h2 {
+    margin-bottom: 5rem;
+}
+
+#contacts-form form {
+    display: flex;
+    flex-direction: column;
+}
+
+#contacts-form input {
+    margin-bottom: 2rem;
+    height: 5vh;
+    padding: 5px;
+    border: 0;
+    border-bottom: 1px solid #0C143D;
+}
+
+input:focus {
+    outline: none;
+    border: none;
+}
+
+.input-lable {
+    font-size: 0.8rem;
+    margin-bottom: 1rem;
+}
+
+#contacts-form button {
+    margin-left: 0;
+}
+
+.main-description button {
+    margin: auto;
+}
+
+
+@media only screen and (max-width: 768px){
+    #first-screen h1 {
+        width: 100%;
+    }
+
+    #first-screen {
+        height: fit-content;
+    }
+
+    .main-description .text {
+        width: 80vw;
+        margin: auto;
+        margin-bottom: 2rem;
+    }
+
+    #clients {
+        flex-direction: column;
+        padding: 2rem;
+    }
+
+    #clients h2 {
+        padding: 0;
+        margin-bottom: 2rem;
+    }
+
+    #clients-icons {
+        display: flex;
+        flex-wrap: wrap;
+        text-align: left;
+    }
+
+    .item-icon {
+        width: 40%;
+    }
+
+    #differentiators {
+        padding: 2rem;
+    }
+
+    #differentiators-items {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    #differentiators-items h3 {
+       min-height: 5vh;
+
+    }
+
+    .description {
+        font-size: 1.4rem;
+    }
+
+    #numbers-items {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    #partnerships {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 2rem;
+    }
+
+    #partnerships-description {
+        width: 100%;
+        font-size: 1.5rem;
+        margin: 0;
+        margin-bottom: 2rem;
+    }
+
+    #contacts {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin: 2rem;
+        margin-top: 0;
+    }
+
+    .map {
+        display: none;
+    }
+
+    .container {
+        padding: 0;
+    }
+
+}

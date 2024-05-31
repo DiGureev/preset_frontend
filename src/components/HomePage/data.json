@@ -1,0 +1,42 @@
+{
+    "differentiators": [
+        {
+            "header": "Data Collection, & Mining",
+            "description": "Ingestion of policy, regulation, incentive data as well as technological advances in form of patents and research papers."
+        },
+        {
+            "header": "Linguistic analysis",
+            "description": "Utilizing state of art NLP models to automate data integration and processing."
+        },
+        {
+            "header": "Architecture",
+            "description": "Structured information for horizontal and vertical market analysis, as well as qualitative and quantitative analysis."
+        },
+        {
+            "header": "Global",
+            "description": "Keep track of global regulatory, policy, and incentive changes, and identify the optimal location for your project."
+        },
+        {
+            "header": "Targeted updates",
+            "description": "Receive only pertinent information presented in a comprehensive format that fulfills your requirements."
+        }
+    ],
+    "numbers": [
+        {
+            "header": "5000",
+            "description": "Pages of policies processed"
+        },
+        {
+            "header": "3+",
+            "description": "Patents"
+        },
+        {
+            "header": "15",
+            "description": "Years of Experience"
+        },
+        {
+            "header": "7",
+            "description": "Intl. Partners"
+        }
+    ]
+}
