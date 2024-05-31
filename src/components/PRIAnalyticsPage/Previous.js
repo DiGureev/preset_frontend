@@ -9,6 +9,17 @@ const Previous = () => {
     const {setKiwiTable, download, setPath, setKeywordsFetched,setTable, setDocName} = useContext(AppContext);
     const [listOfTables, setList] = useState([]);
 
+    const checkPrevious = async () => {
+
+        try{
+            let res = await api.get(`/kiwi/all/`);
+            let data = await res.data;
+            setList(data);
+        } catch (err){
+            console.log(err);
+        }
+    }
+
     useEffect(() => {
         const interval = setInterval(() => {
             checkPrevious();
@@ -36,17 +47,6 @@ const Previous = () => {
             console.log(err);
         }
 
-    }
-
-    const checkPrevious = async () => {
-
-        try{
-            let res = await api.get(`/kiwi/all/`);
-            let data = await res.data;
-            setList(data);
-        } catch (err){
-            console.log(err);
-        }
     }
 
     return <div id="previous-div">

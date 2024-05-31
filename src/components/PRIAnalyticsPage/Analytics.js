@@ -6,7 +6,7 @@ import Previous from "./Previous.js";
 
 
 const Analytics = ()=>{
-      const {keywordsFetched} = useContext(AppContext);
+      const {logged, keywordsFetched} = useContext(AppContext);
 
       // reload page every time keywordsFetched changed
       useEffect(()=>{
@@ -19,7 +19,7 @@ const Analytics = ()=>{
           <div className="content-container">
             {!keywordsFetched && <UploadScreen />}
             <Results/>
-            <Previous />
+            {logged && <Previous />}
           </div>
         </div>
         </>)
