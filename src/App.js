@@ -1,24 +1,25 @@
-import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Navbar from './components/Navigation/Navbar.js';
-import { useState, createContext, useEffect } from 'react';
-import Registration from './components/LoginSignup/Registration.js'
-import Analytics from './components/PRIAnalyticsPage/Analytics.js'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from './components/HomePage/Home.js'
-import Contacts from './components/Contacts.js';
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useState, createContext, useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
-import api from "./api.js";
 import { REFRESH_TOKEN, ACCESS_TOKEN } from "./constants";
-import NotFound from './components/NotFound.js';
+import api from "./api.js";
+// Components
+import Navbar from "./components/Navigation/Navbar.js";
+import Registration from "./components/LoginSignup/Registration.js";
+import Analytics from "./components/PRIAnalyticsPage/Analytics.js";
+import Home from "./components/HomePage/Home.js";
+import Contacts from "./components/Contacts.js";
+import NotFound from "./components/NotFound.js";
 
 export const AppContext = createContext();
 
 function App() {
   // The words user added to the kiWI or plot
-  const [addedWords, setWords]    = useState('');
+  const [addedWords, setWords]    = useState("");
   // Path to the file user uploaded
-  const [file_path, setPath]      = useState('');
+  const [file_path, setPath]      = useState("");
   const [keywordsFetched, 
          setKeywordsFetched]      = useState(false);
   // The main table
@@ -30,31 +31,31 @@ function App() {
   const [matrix, setMatrix]       = useState(false);
 
   // url for downloading CSV and set name of the document
-  const [csvUrl, setURL]          = useState('#');
-  const [docName, setDocName]     = useState('')
+  const [csvUrl, setURL]          = useState("#");
+  const [docName, setDocName]     = useState("");
 
   // Registration and auth
-  const [logged, setLog]        = useState(false)
-  const [username, setUsername] = useState('')
+  const [logged, setLog]        = useState(false);
+  const [username, setUsername] = useState("");
 
   useEffect(()=>{
 
-    auth().catch(()=> setLog(false))
-    getUserInfo()
+    auth().catch(()=> setLog(false));
+    getUserInfo();
 
   }, [])
 
   // function for generating CVS
   const download = (dataTable) => {
-    let newDataTable = []
+    let newDataTable = [];
 
     // Make proper table for cvs generating
     for (let i of dataTable){
-        let newObj = {}
-        newObj.Word = i.Word
-        newObj.Pages = i.Pages.Pages.toString()
-        newObj.Freq = i.Pages.RelativeFrequency
-        newDataTable.push(newObj)
+        let newObj = {};
+        newObj.Word = i.Word;
+        newObj.Pages = i.Pages.Pages.toString();
+        newObj.Freq = i.Pages.RelativeFrequency;
+        newDataTable.push(newObj);
     }
     
     const CSVRows = [];
@@ -67,20 +68,19 @@ function App() {
       values.push(value);
     }
     
-    values = values.join('\n');
+    values = values.join("\n");
     CSVRows.push(values);
-    let data = CSVRows.join('\n');
+    let data = CSVRows.join("\n");
 
-    const blob = new Blob([data], { type: 'text/csv' }); 
+    const blob = new Blob([data], { type: "text/csv" }); 
     const url = window.URL.createObjectURL(blob) ;
     
     // Set CSV URL for downloading
     setURL(url);
 }
-
+    // Refresh token if access token expired
     const refreshToken = async () => {
-      console.log('I am on refresh')
-      const refreshToken = localStorage.getItem(REFRESH_TOKEN)
+      const refreshToken = localStorage.getItem(REFRESH_TOKEN);
 
       try{
           const res = await api.post("/user/refresh/", {
@@ -88,51 +88,47 @@ function App() {
           })
 
           if (res.status === 200) {
-              localStorage.setItem(ACCESS_TOKEN, res.data.access)
-              setLog(true)
+              localStorage.setItem(ACCESS_TOKEN, res.data.access);
+              setLog(true);
           } else {
-              setLog(false)
+              setLog(false);
           }
 
       } catch (error) {
-          console.log(error)
-          setLog(false)
+          console.log(error);
+          setLog(false);
       }
 
     }
 
+    // Check access token. If no token - logout, if token is about to expire - refresh
     const auth = async () => {
-      console.log('I am on auth')
-
-      const token = localStorage.getItem(ACCESS_TOKEN)
+      const token = localStorage.getItem(ACCESS_TOKEN);
 
       if (!token){
-          console.log('No token')
-          setLog(false)
+          console.log("No token");
+          setLog(false);
           return
       }
 
-      console.log('This is token=>', token)
-
-      const decoded = jwtDecode(token)
-      const tokenExpiration = decoded.exp
-      const now = Date.now()/1000
+      const decoded = jwtDecode(token);
+      const tokenExpiration = decoded.exp;
+      const now = Date.now()/1000;
 
       if (tokenExpiration < now){
-          await refreshToken()
+          await refreshToken();
       } else {
-          setLog(true)
+          setLog(true);
       }
-
     }
 
     const getUserInfo = async () => {
 
       try {
-        const res = await api.get(`/user/info/`)
-        setUsername(res.data.username)
+        const res = await api.get(`/user/info/`);
+        setUsername(res.data.username);
       } catch (err) {
-        console.log(err)
+        console.log(err);
       }
 
     }
@@ -142,7 +138,6 @@ function App() {
         <Router>
           <div>
             <Navbar />
-
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/analytics" element={<Analytics/>} />

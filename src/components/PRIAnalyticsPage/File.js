@@ -1,25 +1,25 @@
-import axios from 'axios';
-import { useState, useContext, useEffect } from 'react';
-import { UploadContext } from './UploadScreen.js';
-import { AppContext } from '../../App.js';
+import "../Button.css";
+import "./UploadScreen.css";
+import axios from "axios";
+import api from "../../api.js";
+import { useState, useContext, useEffect } from "react";
+import { UploadContext } from "./UploadScreen.js";
+import { AppContext } from "../../App.js";
 import { FileUploader } from "react-drag-drop-files";
-import '../Button.css';
-import "./UploadScreen.css"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faCircleArrowRight} from '@fortawesome/free-solid-svg-icons';
-import api from '../../api.js';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {faCircleArrowRight} from "@fortawesome/free-solid-svg-icons";
 
 
 const fileTypes = ["PDF"];
 
 
 const File = () => {
-    const [file, setFile] = useState('');
+    const [file, setFile] = useState("");
     // disable the button if nothing uploaded
     const [isButtonDisabled, setIsButtonDisabled] = useState(true);
     // to show loading div while loading
 
-    const { download, docName, setDocName, setPath, setKeywordsFetched, setKiwiTable, setTable } = useContext(AppContext);
+    const { download, setDocName, setPath, setKeywordsFetched, setKiwiTable, setTable } = useContext(AppContext);
     const { url, setMsg, setDisplay, setIsLoading } = useContext(UploadContext);
 
     useEffect(() => {
@@ -32,29 +32,29 @@ const File = () => {
 
     const handleFileChange = (file) => {
         if (file) {
-            setMsg('');
+            setMsg("");
             setFile(file);
         }
     };
 
     const handleUploadClick = async () => {
         if (!file) {
-            setMsg('Please, upload the file');
+            setMsg("Please, upload the file");
             return;
         }
 
-        setDisplay('none')
+        setDisplay("none");
 
         setIsLoading(true); 
 
         let formData = new FormData();
-        formData.append('file', file);
+        formData.append("file", file);
 
         // Get Name for downloading .csv
-        let fileName = file.name 
-        let name = fileName.split(".")[0]
-        name+= '-Kiwi.csv'
-        setDocName(name)
+        let fileName = file.name;
+        let name = fileName.split(".")[0];
+        name+= "-Kiwi.csv";
+        setDocName(name);
 
         try {
             const response = await axios.post(`${url}upload/`, formData, {
@@ -67,45 +67,42 @@ const File = () => {
 
             setKiwiTable(keywords);
 
-            download(keywords)
+            download(keywords);
 
             setPath(path);
             setKeywordsFetched(true);
             setTable(true);
 
-            setFile('')
+            setFile("");
 
             saveTableInDB(name, keywords, path)
 
         } catch (error) {
-            console.error('There was an error:', error);
+            console.error("There was an error:", error);
         } finally {
             setIsLoading(false); 
         }
     };
 
     const saveTableInDB = async (name, table, path) => {
-        name = name.replace('-Kiwi.csv', '')
+        name = name.replace("-Kiwi.csv", "");
 
         let body = {
             name: name, 
             table: JSON.stringify({kiwitable: table}), 
-            path: path}
+            path: path
+        };
 
-        console.log('body => ', body)
         try{
-            const res = await api.post(`/kiwi/all/`, body)
-            console.log(res.data)
+            await api.post(`/kiwi/all/`, body)
         } catch (err) {
             console.log(err)
         }
-        
-        
     }
 
     return (
-        <div className='upload-input'>
-            <div className='upload-content'>
+        <div className="upload-input">
+            <div className="upload-content">
                 <FileUploader 
                     width="50%" 
                     handleChange={handleFileChange} 
@@ -123,4 +120,4 @@ const File = () => {
     );
 }
 
-export default File;
+export default File

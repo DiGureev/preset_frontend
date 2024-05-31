@@ -1,63 +1,59 @@
+import "./Previous.css"
 import { useContext, useEffect, useState } from "react";
-import { AppContext } from "../../App";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faFile} from '@fortawesome/free-solid-svg-icons';
 import api from "../../api";
-import './Previous.css'
-
-// const kiwi_url = process.env.REACT_APP_KIWI_URL;
-const user_url = process.env.REACT_APP_USER_URL
+import { AppContext } from "../../App";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {faFile} from "@fortawesome/free-solid-svg-icons";
 
 const Previous = () => {
-    const {setKiwiTable, download, kiwitable, setPath, setKeywordsFetched,setTable, setDocName} = useContext(AppContext)
-    const [listOfTables, setList] = useState([])
+    const {setKiwiTable, download, setPath, setKeywordsFetched,setTable, setDocName} = useContext(AppContext);
+    const [listOfTables, setList] = useState([]);
 
-    useEffect(()=>{
-        checkPrevious()
-    },[kiwitable])
+    const checkPrevious = async () => {
+
+        try{
+            let res = await api.get(`/kiwi/all/`);
+            let data = await res.data;
+            setList(data);
+        } catch (err){
+            console.log(err);
+        }
+    }
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            checkPrevious();
+        }, 5000);
+    
+        return () => clearInterval(interval); // Cleanup the interval on component unmount
+    }, [checkPrevious]);
 
     const getTable = async (tableName) => {
 
         try {
             const res = await api.get(`/kiwi/table/${encodeURIComponent(tableName)}/`);
-            const data = res.data
+            const data = res.data;
 
-            console.log(data)
+            const table = JSON.parse(data.table);
 
-            const table = JSON.parse(data.table)
-
-            setKiwiTable(table.kiwitable)
-            download(table.kiwitable)
-            setPath(data.path)
+            setKiwiTable(table.kiwitable);
+            download(table.kiwitable);
+            setPath(data.path);
             setKeywordsFetched(true);
             setTable(true);
-            setDocName(data.name)
-
-    
+            setDocName(data.name);
 
         } catch (err) {
-            console.log(err)
+            console.log(err);
         }
 
-    }
-
-    const checkPrevious = async () => {
-
-        try{
-            let res = await api.get(`/kiwi/all/`)
-            let data = await res.data
-            console.log(data)
-            setList(data)
-        } catch (err){
-            console.log(err)
-        }
     }
 
     return <div id="previous-div">
             <h3>Recent</h3>
             <div id="prev-subtitle">
                 <p>Jump back to your last queries</p>
-                <p id="link" style={{color: '#2B58E1', fontWeight:'500'}}>See all</p>
+                <p id="link" style={{color: "#2B58E1", fontWeight:"500"}}>See all</p>
             </div>
             <div>
                 {
@@ -83,7 +79,7 @@ const Previous = () => {
                         let name = table.name
 
                         if (name.length > 30){
-                            name = name.slice(0,30) + '...'
+                            name = name.slice(0,30) + "..."
                         }
 
                         return <div key={index} className="docsname-div" onClick={() => getTable(table.name)}>

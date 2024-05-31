@@ -6,7 +6,7 @@ import NetworkPlot from "./NetworkPlot.js";
 import HeaderResults from "./HeaderResults.js";
 
 const Results = () => {
-    const {table, grasp, matrix} = useContext(AppContext)
+    const {table, grasp, matrix} = useContext(AppContext);
 
     // Render correct component depends on user choice
     if (table === true) {

@@ -1,23 +1,22 @@
+import "../../App.css";
+import "./Results.css";
 import axios from "axios";
 import { useContext, useRef} from "react";
 import { AppContext } from "../../App.js";
-// import Table from 'react-bootstrap/Table';
 import NavButtons from "./NavButtons.js";
-import '../../App.css';
-import './Results.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleQuestion} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleQuestion} from "@fortawesome/free-solid-svg-icons";
 
 const url = process.env.REACT_APP_API_URL;
 
 const WordTable = ( ) => {
-    const {docName, kiwiTable, setKiwiTable, file_path, header, setWords, csvUrl} = useContext(AppContext);
-    const additionalWords = useRef('');
+    const {docName, kiwiTable, setKiwiTable, file_path, setWords, csvUrl} = useContext(AppContext);
+    const additionalWords = useRef("");
 
     const addWords = async () => {
-      setWords(additionalWords.current.value.split(', '));
+      setWords(additionalWords.current.value.split(", "));
 
-      let body = {words: additionalWords.current.value.split(', '),
+      let body = {words: additionalWords.current.value.split(", "),
                   path: file_path
                 };
 
@@ -28,9 +27,9 @@ const WordTable = ( ) => {
           setKiwiTable(keywords);
 
           // To clean input field
-          additionalWords.current.value = '';
+          additionalWords.current.value = "";
         } catch (error) {
-          console.log('There was an error', error);
+          console.log("There was an error", error);
         }
     
     }
@@ -39,8 +38,8 @@ const WordTable = ( ) => {
       <div className="result-div">
          <NavButtons/>
         <h2>Dive-In Reading</h2>
-        <div id='content'>
-          <div id='table-content'>
+        <div id="content">
+          <div id="table-content">
             {/* Main table */}
             <table >
               <thead>
@@ -67,6 +66,7 @@ const WordTable = ( ) => {
           <div id="additional-words-input">
           <input  type="text" placeholder="energy" ref={additionalWords}/>
           <FontAwesomeIcon icon={faCircleQuestion} id="additional-words-icon"/>
+          {/* Hidden div that appears on hover */}
           <div class="hidden-div">
             <h3>Enhance Research with Keyword Indexing:</h3>
             <ul>
@@ -84,8 +84,6 @@ const WordTable = ( ) => {
         
         {/* Download CSV button */}
         <button id="download_csv"><a href={csvUrl} download={docName}>Download table (CSV)</a></button>
-        
-        {/* The buttons at the bottom of the page to switch between the components */}
 
       </div>
     )

@@ -1,21 +1,21 @@
-import axios from 'axios';
-import { useRef, useContext, useState, useEffect } from 'react';
-import { UploadContext } from './UploadScreen.js';
-import { AppContext } from '../../App.js';
-import '../Button.css';
+import "../Button.css";
 import "./UploadScreen.css"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faCircleArrowRight} from '@fortawesome/free-solid-svg-icons';
-import api from '../../api.js';
+import axios from "axios";
+import api from "../../api.js";
+import { useRef, useContext, useState, useEffect } from "react";
+import { UploadContext } from "./UploadScreen.js";
+import { AppContext } from "../../App.js";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {faCircleArrowRight} from "@fortawesome/free-solid-svg-icons";
 
 
 const Link = () => {
-    const linkInput = useRef('');
+    const linkInput = useRef("");
     // disable the button if nothing uploaded
     const [linkUploaded, setLinkUploaded] = useState(true);
     // to show loading div while loading 
 
-    const { download, docName, setDocName, setPath, setKeywordsFetched, setKiwiTable, setTable } = useContext(AppContext);
+    const { download, setDocName, setPath, setKeywordsFetched, setKiwiTable, setTable } = useContext(AppContext);
     const { url, setMsg, setDisplay, setIsLoading } = useContext(UploadContext);
 
     useEffect(() => {
@@ -23,8 +23,8 @@ const Link = () => {
     }, []);
 
     const fetchData = async () => {
-        setDisplay('none')
-        setMsg('');
+        setDisplay("none");
+        setMsg("");
         setIsLoading(true); 
 
         let body = { link: linkInput.current.value };
@@ -32,7 +32,7 @@ const Link = () => {
             const response = await axios.post(`${url}upload/`, body);
             let data = response.data;
             if (data.msg) {
-                setMsg('Oops! It is not a correct link..');
+                setMsg("Oops! It is not a correct link..");
             } else {
                 const keywords = data.kiwi_table;
                 const path = data.path;
@@ -42,41 +42,40 @@ const Link = () => {
                 setPath(path);
 
                 // Get Name for downloading .csv
-                let link = linkInput.current.value
-                let pathArr = link.split("/")
-                link = pathArr.slice(-1)[0]
-                let name = link.split(".")[0]
-                name += '-Kiwi.csv'
+                let link = linkInput.current.value;
+                let pathArr = link.split("/");
+                link = pathArr.slice(-1)[0];
+                let name = link.split(".")[0];
+                name += "-Kiwi.csv";
 
-                setDocName(name)
+                setDocName(name);
 
                 setKeywordsFetched(true);
                 setTable(true);
-                linkInput.current.value = ''
+                linkInput.current.value = "";
 
-                saveTableInDB(name, keywords, path)
+                saveTableInDB(name, keywords, path);
             }
         } catch (error) {
-            console.error('There was an error:', error);
+            console.error("There was an error:", error);
         } finally {
             setIsLoading(false); 
         }
     }
 
     const saveTableInDB = async (name, table, path) => {
-        let new_name = name.replace('-Kiwi.csv', '')
+        let new_name = name.replace("-Kiwi.csv", "");
 
         let body = {
             name: new_name, 
             table: JSON.stringify({kiwitable: table}), 
-            path: path}
+            path: path
+        };
 
-        console.log('body => ', body)
         try{
-            const res = await api.post(`/kiwi/all/`, body)
-            console.log(res.data)
+            await api.post(`/kiwi/all/`, body);
         } catch (err) {
-            console.log(err)
+            console.log(err);
         }
         
         
@@ -87,8 +86,8 @@ const Link = () => {
     };
 
     return (
-        <div className='upload-input'>
-            <div className='upload-content'>
+        <div className="upload-input">
+            <div className="upload-content">
                 <input type="text" placeholder="https://example.com/document-scan" ref={linkInput} onChange={handleInputChange} />
             </div>
             <button onClick={fetchData} disabled={!linkUploaded}>Get the keywords <FontAwesomeIcon icon={faCircleArrowRight}/></button>
@@ -97,4 +96,4 @@ const Link = () => {
     );
 }
 
-export default Link;
+export default Link
