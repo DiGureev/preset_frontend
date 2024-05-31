@@ -6,12 +6,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faFile} from "@fortawesome/free-solid-svg-icons";
 
 const Previous = () => {
-    const {setKiwiTable, download, kiwitable, setPath, setKeywordsFetched,setTable, setDocName} = useContext(AppContext);
+    const {setKiwiTable, download, setPath, setKeywordsFetched,setTable, setDocName} = useContext(AppContext);
     const [listOfTables, setList] = useState([]);
 
-    useEffect(()=>{
-        checkPrevious();
-    },[kiwitable])
+    useEffect(() => {
+        const interval = setInterval(() => {
+            checkPrevious();
+        }, 5000);
+    
+        return () => clearInterval(interval); // Cleanup the interval on component unmount
+    }, [checkPrevious]);
 
     const getTable = async (tableName) => {
 
