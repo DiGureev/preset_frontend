@@ -1,15 +1,13 @@
-import { AppContext } from "../../App"
-import { useContext } from "react"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFile} from '@fortawesome/free-solid-svg-icons';
-import './HeaderResults.css'
+import "./HeaderResults.css"
+import { AppContext } from "../../App.js";
+import { useContext } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFile} from "@fortawesome/free-solid-svg-icons";
 
 const HeaderResults = () => {
 
-    const {docName, table, grasp, matrix, keywordsFetched, setKeywordsFetched} = useContext(AppContext)
-    let filename = docName.slice(0,8) + '...pdf'
-
-    console.log(filename)
+    const {docName, table, grasp, matrix, keywordsFetched, setKeywordsFetched} = useContext(AppContext);
+    let filename = docName.slice(0,8) + "...pdf";
 
     return (
         <>

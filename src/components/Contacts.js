@@ -1,49 +1,45 @@
-import './HomePage/Home.css';
-import { useRef , useState} from 'react';
-import api from '../api';
+import "./HomePage/Home.css";
+import { useRef , useState} from "react";
+import api from "../api";
 
 const Contacts = () => {
-    const first = useRef()
-    const last = useRef()
-    const email = useRef()
-    const text = useRef()
+    const first = useRef("");
+    const last = useRef("");
+    const email = useRef("");
+    const text = useRef("");
 
-    const [msg, setMsg] = useState('')
+    const [msg, setMsg] = useState("");
 
     const handleSubmit = async (e) => {
-        e.preventDefault()
-        const first_name = first.current.value
-        const last_name = last.current.value
-        const user_email = email.current.value
-        let message = text.current.value
+        e.preventDefault();
+        const first_name = first.current.value;
+        const last_name = last.current.value;
+        const user_email = email.current.value;
+        let message = text.current.value;
 
         if (message === ""){
-            message = "No message"
+            message = "No message";
         }
 
-        let body = {first_name: first_name , last_name: last_name, email: user_email, message: message}
-
-        console.log(body)
+        let body = {first_name: first_name , last_name: last_name, email: user_email, message: message};
 
         try {
-            const res = await api.post(`/contact/add/`, body)
+            const res = await api.post(`/contact/add/`, body);
 
             if (res.status === 201){
-                setMsg("Thank you! We have recieved your contact!")
+                setMsg("Thank you! We have recieved your contact!");
 
-                first.current.value = ''
-                last.current.value = ''
-                email.current.value = ''
-                text.current.value = ''
+                first.current.value = "";
+                last.current.value = "";
+                email.current.value = "";
+                text.current.value = "";
 
                 setTimeout(()=>{
-                    setMsg('')
+                    setMsg("");
                 }, 2000)
             } else {
-                setMsg("Something went wrong, please try again.")
+                setMsg("Something went wrong, please try again.");
             }
-
-            console.log(res.data)
 
         } catch (err) {
             console.log(err)

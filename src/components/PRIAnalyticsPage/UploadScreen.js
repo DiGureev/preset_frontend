@@ -1,11 +1,10 @@
-import { useState, createContext, useContext, useEffect} from "react";
+import "./UploadScreen.css";
+import { useState, createContext, useContext} from "react";
+import {AppContext} from "../../App.js";
 import Link from "./Link.js";
 import File from "./File.js";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFile, faCircleArrowUp } from '@fortawesome/free-solid-svg-icons';
-import "./UploadScreen.css"
-import {AppContext} from "../../App.js";
-import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFile, faCircleArrowUp } from "@fortawesome/free-solid-svg-icons";
 
 export const UploadContext = createContext();
 
@@ -14,39 +13,26 @@ const url = process.env.REACT_APP_API_URL;
 
 const UploadScreen = () => {
   // To save the path of the loaded doc
-  const [msg, setMsg] = useState('');
-  const [display, setDisplay] = useState('none')
-  const {logged} = useContext(AppContext)
+  const [msg, setMsg] = useState("");
+  const [display, setDisplay] = useState("none");
+  const {logged} = useContext(AppContext);
   const [isLoading, setIsLoading] = useState(false);
 
+  // If mobile device - don't show PRIAnalytics
   const isSmallScreen = window.innerWidth <= 768;
-
-  console.log(isSmallScreen)
-
-  const navigate = useNavigate();
-
-  useEffect(()=>{
-    if(!logged) {
-      setTimeout(()=>{
-        navigate("/login")
-      }, 1500)
-      
-    }
-  })
 
   const handleUploadWindow = () => {
     const popup = document.getElementById("link-file-container");
-    console.log(popup)
 
-    if (display === 'none') {
+    if (display === "none") {
       setTimeout(() => {
-          popup.style.opacity = '1'; // Transition to fully visible
+          popup.style.opacity = "1"; // Transition to fully visible
       }, 10); // Delay to ensure transition starts
-      setDisplay('');
+      setDisplay("");
     } else {
-      popup.style.opacity = '0'; // Transition to fully hidden
+      popup.style.opacity = "0"; // Transition to fully hidden
       setTimeout(() => {
-          setDisplay('none');
+          setDisplay("none");
       }, 500);
     }
   };

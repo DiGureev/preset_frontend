@@ -1,28 +1,28 @@
-import axios from 'axios';
+import "../../App.css";
+import "./Results.css"
+import axios from "axios";
 import { useState, useContext, useEffect, useRef } from "react";
-import { AppContext } from '../../App.js';
-import Plot from 'react-plotly.js';
+import { AppContext } from "../../App.js";
+import Plot from "react-plotly.js";
 import NavButtons from "./NavButtons.js";
-import '../../App.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleQuestion} from '@fortawesome/free-solid-svg-icons';
-import './Results.css'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleQuestion} from "@fortawesome/free-solid-svg-icons";
 
 const url = process.env.REACT_APP_API_URL;
 
 const PlotPage = () => {
     const [plot, setPlot] = useState([]);
-    const [selectedWord, setSelectedWord] = useState('');
+    const [selectedWord, setSelectedWord] = useState("");
 
     const { file_path, kiwiTable} = useContext(AppContext);
-    const additionalWords = useRef('');
+    // const additionalWords = useRef("");
 
     // const addWords = async () => {
     //     setSelectedWord(additionalWords.current.value)
     // }
 
     const getPlot = async () => {
-        let selected = selectedWord || (kiwiTable.length > 0 ? kiwiTable[0].Word : '');
+        let selected = selectedWord || (kiwiTable.length > 0 ? kiwiTable[0].Word : "");
 
         let body = {
             words: selected,
@@ -36,12 +36,12 @@ const PlotPage = () => {
             setPlot(plotData.data);
             setSelectedWord(selected);
         } catch (error) {
-            console.log('There was an error', error);
+            console.log("There was an error", error);
         }
     };
 
     useEffect(() => {
-        getPlot()
+        getPlot();
     }, [file_path, kiwiTable, selectedWord]);
 
 
@@ -89,14 +89,14 @@ const PlotPage = () => {
                     <button id="additional-words-btn" onClick={addWords}>Build the graph</button>
                 </div> */}
             </div>
-        <div id='content'>
+        <div id="content">
             
             {/* Display plot */}
             {selectedWord && (
                 <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
-                    {plot.length == 0? <p>This word is not frequent enough or not present.<br/> Please try another word.</p> : <Plot data={plot} layout={{title: `Context for "${selectedWord}"`, yaxis: {
+                    {plot.length === 0? <p>This word is not frequent enough or not present.<br/> Please try another word.</p> : <Plot data={plot} layout={{title: `Context for "${selectedWord}"`, yaxis: {
                         showgrid: false
-                      }, paper_bgcolor:"#E0E7FB", plot_bgcolor:"#E0E7FB" }} useResizeHandler={true} style={{width: '100%', height: '100%'}} 
+                      }, paper_bgcolor:"#E0E7FB", plot_bgcolor:"#E0E7FB" }} useResizeHandler={true} style={{width: "100%", height: "100%"}} 
                       />}
                 </div>
             )}

@@ -1,86 +1,96 @@
-import { useRef, useContext, useState } from "react";
-import { AppContext } from "../../App.js";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye, faEyeSlash, faCircleArrowRight} from '@fortawesome/free-solid-svg-icons';
-import { useParams } from 'react-router-dom';
-import { useNavigate } from "react-router-dom";
-import './Registration.css'
+import "./Registration.css";
 import api from "../../api.js";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../../constants.js";
-
-
-const url = process.env.REACT_APP_USER_URL;
+import { useRef, useContext, useState } from "react";
+import { useParams, useNavigate} from "react-router-dom";
+import { AppContext } from "../../App.js";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash, faCircleArrowRight} from "@fortawesome/free-solid-svg-icons";
 
 const Registration = () => {
     const navigate = useNavigate();
     const { path } = useParams();
-    const [icon, setIcon] = useState(faEye)
-    const username = useRef('')
-    const email = useRef('')
-    const password = useRef('')
-    const {setUsername, setLog} = useContext(AppContext)
-    const [msg, setMsg] = useState("")
+    const [icon, setIcon] = useState(faEye);
+    const username = useRef("");
+    const email = useRef("");
+    const password = useRef("");
+    const {setUsername, setLog} = useContext(AppContext);
+    const [msg, setMsg] = useState("");
 
     const handleSubmit = (e) => {
-        e.preventDefault()
+        e.preventDefault();
 
-        let usernameValue = username.current.value
-        let emailValue = email.current.value
-        let passwordValue = password.current.value
+        let usernameValue = username.current.value;
+        let emailValue = email.current.value;
+        let passwordValue = password.current.value;
 
-        setUsername(usernameValue)
+        setUsername(usernameValue);
 
         let body = {
             username: usernameValue,
             email: emailValue,
             password: passwordValue
-        }
+        };
 
-        register(body)
+        register(body);
     }
 
     const handleLogin = (e) => {
-        e.preventDefault()
+        e.preventDefault();
 
-        let emailValue = email.current.value
-        let passwordValue = password.current.value
+        let emailValue = email.current.value;
+        let passwordValue = password.current.value;
 
         let body = {
             username: emailValue,
             password: passwordValue
-        }
+        };
 
-        register(body)
+        register(body);
 
     }
 
     const register = async (body) => {
 
-        let url_path = ''
-            if (path === "login"){
-                url_path = `/user/gettoken/`
-            }else {
-                url_path = `/user/signup/`
-            }
+        let url_path = "";
+
+        if (path === "login"){
+            url_path = `/user/gettoken/`
+        }else {
+            url_path = `/user/signup/`
+        }
 
         try {
             const res = await api.post(url_path, body)
 
             if (res.status === 200){
-                setUsername(body.username)
-                setLog(true)
-            }
-            if (path === "login") {
-                localStorage.setItem(ACCESS_TOKEN, res.data.access);
-                localStorage.setItem(REFRESH_TOKEN, res.data.refresh);
-                console.log('This is token from register =>', res.data.access)
-                navigate("/")
+                setUsername(body.username);
+                setLog(true);
+
+                if (path === "login") {
+                    localStorage.setItem(ACCESS_TOKEN, res.data.access);
+                    localStorage.setItem(REFRESH_TOKEN, res.data.refresh);
+                    setMsg("Success!");
+
+                    setTimeout(()=>{
+                        navigate("/")
+                    }, 500);
+                } else {
+                    setMsg("Success!")
+                    setTimeout(()=>{
+                        navigate("/login")
+                    }, 500);
+                }
             } else {
-                navigate("/login")
+                if (path === "login") {
+                    setMsg("Wrong username or password");
+                } else {
+                    setMsg("Can't register new user now");
+                }
             }
 
         } catch (error) {
-            console.log(error)
+            console.log(error);
         } 
     }
     
@@ -89,15 +99,14 @@ const Registration = () => {
         
         if (passwordField.type === "password") {
             passwordField.type = "text";
-            setIcon(faEyeSlash)
+            setIcon(faEyeSlash);
         } else {
             passwordField.type = "password";
-            setIcon(faEye)
+            setIcon(faEye);
         }
     }
 
     if (path === "login"){
-
         return(
             <div id="registration-div">
             <h1>Login</h1>
@@ -106,7 +115,7 @@ const Registration = () => {
                 <input name="text" ref={email}/>
                 <label >Password</label>
                 <div class="password-container">
-                    <input name="password" type="password" id='password' ref={password}/>
+                    <input name="password" type="password" id="password" ref={password}/>
                     <FontAwesomeIcon icon={icon} className="toggle-password" onClick={togglePasswordVisibility}/>
                 </div>
                 <button>Continue <FontAwesomeIcon icon={faCircleArrowRight}/></button>
@@ -125,7 +134,7 @@ const Registration = () => {
                 <input name="email" ref={email}/>
                 <label >Password</label>
                 <div class="password-container">
-                    <input name="password" type="password" id='password' ref={password}/>
+                    <input name="password" type="password" id="password" ref={password}/>
                     <FontAwesomeIcon icon={icon} className="toggle-password" onClick={togglePasswordVisibility}/>
                 </div>
                 <button>Create account <FontAwesomeIcon icon={faCircleArrowRight}/></button>
@@ -134,8 +143,6 @@ const Registration = () => {
             </div>
         )
     }
-
-
 }
 
 export default Registration

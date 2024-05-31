@@ -7,14 +7,6 @@
   font-family: 'DM Sans';
 }
 
-
-
-/* body {
- background-color: rgb(12, 25, 63);
-} */
-
-
-
 #search_word {
   padding: 8px;
   border-radius: 5px;
@@ -62,12 +54,6 @@
   background-color: white;
   height: 12vh;
 }
-
-/* .main {
-  background-color: rgb(12, 25, 63);
-  min-height: 100vh;
-} */
-
 .grid-container {
   display: grid;
   grid-template-columns: 1fr;
@@ -84,10 +70,6 @@
   gap: 20px;
   justify-content: center;
   align-items: center;
-  /* display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
-  background-color: rgb(12, 25, 63); */
 }
 
 @media screen and (max-width: 768px) {
@@ -102,33 +84,6 @@ h1 {
   margin-bottom: 2rem;
   margin-top: 0;
 }
-
-/* .upload-input {
-  width: calc(50% - 10px);
-  padding: 20px;
-  border: 0;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  align-content: space-between;
-  min-width: 378px;
-  margin-right: 5px;
-  margin-bottom: 15px;
-} */
-
-/* .upload-content {
-  width: calc(50% - 10px);
-  padding: 10px; 
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin: auto;
-  margin-bottom: 15px;
-} */
-
-
 
 .introText{
   margin-bottom: 15px;
@@ -151,15 +106,6 @@ h1 {
   justify-content: center;
   flex-wrap: wrap;
 }
-
-/* #additional-words {
-  display: flex;
-  width: 60%;
-  margin: auto;
-  flex-wrap: wrap;
-  flex-direction: column;
-  padding: 1rem;
-} */
 
 #download_csv a {
   color: white;
@@ -185,22 +131,6 @@ h1 {
   margin: auto;
 }
 
-/* #table-content {
-  padding: 1rem;
-  height: 300px;
-  overflow: scroll;
-  width: 100%;
-  margin: auto;
-  margin-bottom: 2rem;
-  overflow-y: auto;
-} */
-
-/* table thead tr:first-child th {
-  position: sticky;
-  top: 0px;
-  background-color: #afc8f0;
-} */
-
 .copyright {
   font-size: 1.2rem;
   color: grey;
@@ -208,16 +138,6 @@ h1 {
 }
 
 @media only screen and (max-width: 768px) {
-  /* .upload-input {
-    width: 70%;
-    margin-bottom: 15px;
-  } */
-
-  /* .upload-content {
-    width: 70%;
-    margin-bottom: 15px;
-    margin-top: 15px;
-  }   */
 
   #content {
     flex-direction: column;
