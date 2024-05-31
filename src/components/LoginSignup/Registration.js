@@ -84,7 +84,7 @@ const Registration = () => {
                 if (path === "login") {
                     setMsg("Wrong username or password");
                 } else {
-                    setMsg("This username or email already in use");
+                    setMsg("This username already in use, please choose another one or Log in");
                 }
             }
 

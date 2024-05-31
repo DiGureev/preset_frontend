@@ -6,12 +6,12 @@ import Previous from "./Previous.js";
 
 
 const Analytics = ()=>{
-      const {logged, keywordsFetched} = useContext(AppContext);
+      const {kiwitable, keywordsFetched} = useContext(AppContext);
 
-      // reload page every time keywordsFetched changed
+      // reload page every time kiwitable changed
       useEffect(()=>{
 
-      },[keywordsFetched])
+      },[kiwitable])
 
         return (
         <>
@@ -19,7 +19,7 @@ const Analytics = ()=>{
           <div className="content-container">
             {!keywordsFetched && <UploadScreen />}
             <Results/>
-            {logged && <Previous />}
+            <Previous />
           </div>
         </div>
         </>)
