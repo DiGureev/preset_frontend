@@ -67,25 +67,24 @@ const Registration = () => {
                 setUsername(body.username);
                 setLog(true);
 
-                if (path === "login") {
-                    localStorage.setItem(ACCESS_TOKEN, res.data.access);
-                    localStorage.setItem(REFRESH_TOKEN, res.data.refresh);
-                    setMsg("Success!");
+                localStorage.setItem(ACCESS_TOKEN, res.data.access);
+                localStorage.setItem(REFRESH_TOKEN, res.data.refresh);
+                setMsg("Success!");
 
-                    setTimeout(()=>{
-                        navigate("/")
-                    }, 500);
-                } else {
-                    setMsg("Success!")
-                    setTimeout(()=>{
-                        navigate("/login")
-                    }, 500);
-                }
+                setTimeout(()=>{
+                    navigate("/")
+                }, 500);
+            } else if (res.status === 201){
+                setMsg("Success!")
+
+                setTimeout(()=>{
+                    navigate("/login")
+                }, 500);
             } else {
                 if (path === "login") {
                     setMsg("Wrong username or password");
                 } else {
-                    setMsg("Can't register new user now");
+                    setMsg("This username or email already in use");
                 }
             }
 
