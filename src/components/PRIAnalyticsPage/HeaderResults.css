@@ -30,6 +30,7 @@
 }
 
 .load-another-doc-div {
+    cursor: pointer;
     position: absolute;
     margin: 1rem;
     top: 0;
